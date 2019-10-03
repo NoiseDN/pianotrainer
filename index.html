@@ -1,0 +1,56 @@
+<html>
+<head>
+  <script type="text/javascript" src="notes.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="util.js"></script>
+  <script type="text/javascript" src="lessons.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<section class="piano">
+  <div id="note_C1" class="note white" onclick="hit('c', 1)"></div>
+  <div id="note_C1#" class="note black c1" onclick="hit('c', 1, true)"></div>
+  <div id="note_D1" class="note white" onclick="hit('d', 1)"></div>
+  <div id="note_D1#" class="note black d1" onclick="hit('d', 1, true)"></div>
+  <div id="note_E1" class="note white" onclick="hit('e', 1)"></div>
+  <div id="note_F1" class="note white" onclick="hit('f', 1)"></div>
+  <div id="note_F1#" class="note black f1" onclick="hit('f', 1, true)"></div>
+  <div id="note_G1" class="note white" onclick="hit('g', 1)"></div>
+  <div id="note_G1#" class="note black g1" onclick="hit('g', 1, true)"></div>
+  <div id="note_A1" class="note white" onclick="hit('a', 1)"></div>
+  <div id="note_A1#" class="note black a1" onclick="hit('a', 1, true)"></div>
+  <div id="note_B1" class="note white" onclick="hit('b', 1)"></div>
+
+  <div id="note_C2" class="note white" onclick="hit('c', 2)"></div>
+  <div id="note_C2#" class="note black c2" onclick="hit('c', 2, true)"></div>
+  <div id="note_D2" class="note white" onclick="hit('d', 2)"></div>
+  <div id="note_D2#" class="note black d2" onclick="hit('d', 2, true)"></div>
+  <div id="note_E2" class="note white" onclick="hit('e', 2)"></div>
+  <div id="note_F2" class="note white" onclick="hit('f', 2)"></div>
+  <div id="note_F2#" class="note black f2" onclick="hit('f', 2, true)"></div>
+  <div id="note_G2" class="note white" onclick="hit('g', 2)"></div>
+  <div id="note_G2#" class="note black g2" onclick="hit('g', 2, true)"></div>
+  <div id="note_A2" class="note white" onclick="hit('a', 2)"></div>
+  <div id="note_A2#" class="note black a2" onclick="hit('a', 2, true)"></div>
+  <div id="note_B2" class="note white" onclick="hit('b', 2)"></div>
+</section>
+<section class="task-container">
+  <div id="task_name" class="task"></div>
+</section>
+<section id="settings">
+  <input type="checkbox" name="whites" id="whites" checked onclick="toggleWhites()"/><label for="whites">Whites</label><br/>
+  <input type="checkbox" name="sharp" id="sharp" onclick="toggleSharp()"/><label for="sharp">Sharp</label><br/>
+  <input type="checkbox" name="flat" id="flat" onclick="toggleFlat()"/><label for="flat">Flat</label><br/><br/>
+  <input type="checkbox" name="tone" id="tone" onclick="toggleTone()"/><label for="tone">Tone</label><br/>
+  <input type="checkbox" name="halftone" id="halftone" value="false" onclick="toggleHalftone()"/><label for="halftone">Halftone</label><br/>
+
+  <select name="lesson" id="lesson" onchange="start()">
+    <option value="NOTE_NAMES" selected>Note names</option>
+    <option value="NAME_THE_NOTE">Name the note</option>
+    <option value="TONE_HALFTONE">Tone / Halftone</option>
+    <option value="NAME_ACCORD">Name accord</option>
+    <option value="BUILD_ACCORD">Build accord</option>
+  </select>
+</section>
+</body>
+</html>

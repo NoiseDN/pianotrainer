@@ -1,0 +1,56 @@
+.piano {
+  display: inline-table;
+  width: 1168px;
+}
+.task-container {
+  text-align: center;
+  width: 1168px;
+}
+.task {
+  font-size: 62px;
+}
+.note {
+  border: 2px solid black;
+}
+.note.white {
+  border-right-width: 0;
+  width: 80px;
+  height: 200px;
+  display: inline-block;
+  cursor: pointer;
+}
+.note.white.active {
+  background-color: #dd9;
+}
+.note.white:last-child {
+  border-right-width: 2px;
+}
+.note.black {
+  border-top-width: 0;
+  width: 40px;
+  height: 140px;
+  background-color: #000;
+  position: absolute;
+  top: 10px;
+  cursor: pointer;
+}
+.note.correct {
+  background-color: #0b0;
+}
+.note.wrong {
+  background-color: #b00;
+}
+/*.taskNote.black:hover {*/
+  /*background-color: #222;*/
+/*}*/
+
+.note.black.c1 { left: 70px; }
+.note.black.d1 { left: 153px; }
+.note.black.f1 { left: 316px; }
+.note.black.g1 { left: 399px; }
+.note.black.a1 { left: 481px; }
+.note.black.c2 { left: 645px; }
+.note.black.d2 { left: 728px; }
+.note.black.f2 { left: 891px; }
+.note.black.g2 { left: 974px; }
+.note.black.a2 { left: 1055px; }
