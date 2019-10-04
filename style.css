@@ -26,7 +26,7 @@
   display: inline-block;
   cursor: pointer;
 }
-.note.white.active {
+.note.white.active, .note.white.selected {
   background-color: #dd9;
 }
 .note.white:last-child {
@@ -41,8 +41,11 @@
   top: 10px;
   cursor: pointer;
 }
+.note.black.selected {
+  background-color: #666;
+}
 .note.correct {
-  background-color: #0b0;
+  background-color: #0b0 !important;
 }
 .note.wrong {
   background-color: #b00;
@@ -50,6 +53,20 @@
 .settings {
   border: 0;
   width: 1168px;
+}
+
+.button {
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: burlywood;
+  display: inline-table;
+  font-size: 33px;
+}
+.button:hover {
+  background-color: firebrick;
 }
 
 .note.black.c1 { left: 70px; }

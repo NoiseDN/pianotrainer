@@ -39,6 +39,17 @@
 </section>
 <section class="task-container">
   <div id="task_note" class="task"></div>
+  <div id="note_buttons">
+    <!-- TODO randomize buttons order -->
+    <div id="note_button_c" class="button" onclick="selectNote('B')">B</div>
+    <div id="note_button_d" class="button" onclick="selectNote('G')">G</div>
+    <div id="note_button_e" class="button" onclick="selectNote('E')">E</div>
+    <div id="note_button_f" class="button" onclick="selectNote('F')">F</div>
+    <div id="note_button_g" class="button" onclick="selectNote('D')">D</div>
+    <div id="note_button_a" class="button" onclick="selectNote('A')">A</div>
+    <div id="note_button_b" class="button" onclick="selectNote('C')">C</div>
+    <!-- TODO support sharp and flat notes -->
+  </div>
 </section>
 <table class="settings">
   <tr>
@@ -53,8 +64,8 @@
     </td>
     <td>
       <select name="lesson" id="lesson" onchange="start()">
-        <option value="NOTE_NAMES" selected>Note names</option>
-        <option value="NAME_THE_NOTE">Name the note</option>
+        <option value="NAME_THE_NOTE" selected>Name the note</option>
+        <option value="NOTE_NAMES">Note names</option>
         <option value="TONE_HALFTONE">Tone / Halftone</option>
         <option value="NAME_ACCORD">Name accord</option>
         <option value="BUILD_ACCORD">Build accord</option>
@@ -62,5 +73,8 @@
     </td>
   </tr>
 </table>
+<section class="statistics">
+  Score: <span id="correct">0</span>/<span id="total">0</span>
+</section>
 </body>
 </html>

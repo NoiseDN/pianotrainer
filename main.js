@@ -4,6 +4,8 @@ let flat = false;
 let tone = false;
 let halftone = false;
 let taskNote, pressedNote, selectedLesson, selectedOctave;
+let correct = 0;
+let total = 0;
 
 function toggleWhites() {
   whites = !whites;
@@ -44,9 +46,30 @@ function hit(noteName, octave, sharp = false, flat = false) {
   }
 }
 
+function selectNote(noteName) {
+  const taskNoteContainer = findTaskNoteContainer();
+
+  findNode(taskNote).classList.add('correct');
+  if (taskNote.name === noteName) {
+    taskNoteContainer.innerHTML = noteName + " - Correct! :)";
+    correct++;
+  } else {
+    taskNoteContainer.innerHTML = noteName + " - Wrong! :(";
+    //TODO support sharp and flat
+    const selectedNote = getNote(noteName, 1, false, false);
+    findNode(selectedNote).classList.add('wrong');
+  }
+  total++;
+
+  setTimeout(() => {
+    play();
+  }, 2000);
+}
+
 function resetNotesColor() {
   let notes = document.getElementsByClassName("note");
   for (let i = 0; i < notes.length; i++) {
+    notes[i].classList.remove('selected');
     notes[i].classList.remove('correct');
     notes[i].classList.remove('wrong');
   }
@@ -73,12 +96,15 @@ function getSelectedLesson() {
 
 function play() {
   resetNotesColor();
-
-  highlightRandomOctave();
+  resetTaskContainer();
+  updateScores();
 
   switch (selectedLesson) {
     case LESSON.NOTE_NAMES:
       runNoteNames();
+    break;
+    case LESSON.NAME_THE_NOTE:
+      runNameTheNote();
     break;
     default:
       throw 'Lesson not implemented'
@@ -90,9 +116,23 @@ function play() {
  *  Objective: learn a note placement on a piano
  */
 function runNoteNames() {
+  highlightRandomOctave();
+
   taskNote = getRandomNote(selectedOctave, whites, sharp, flat);
 
   findTaskNoteContainer().innerHTML = taskNote.print();
+}
+
+/**
+ *  Lesson: Name the note
+ *  Objective: learn notes and their placement
+ */
+function runNameTheNote() {
+  //TODO remove click listeners from piano buttons
+
+  taskNote = getRandomNote(getRandomOctave(), whites, sharp, flat);
+
+  findNode(taskNote).classList.add("selected");
 }
 
 function end(success) {
@@ -100,6 +140,7 @@ function end(success) {
 
   if (success) {
     taskNoteContainer.innerHTML = taskNoteContainer.innerHTML + " - Correct! :)";
+
   } else {
     taskNoteContainer.innerHTML = pressedNote.print() + " - Wrong! :(";
   }
@@ -111,6 +152,15 @@ function end(success) {
 
 function findTaskNoteContainer() {
   return document.getElementById("task_note");
+}
+
+function resetTaskContainer() {
+  findTaskNoteContainer().innerHTML = '';
+}
+
+function updateScores() {
+  document.getElementById("correct").innerHTML = correct + '';
+  document.getElementById("total").innerHTML = total + '';
 }
 
 function findDescriptionContainer() {
