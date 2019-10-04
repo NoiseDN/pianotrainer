@@ -4,6 +4,8 @@
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="util.js"></script>
   <script type="text/javascript" src="lessons.js"></script>
+  <script type="text/javascript" src="lesson_1_note_names.js"></script>
+  <script type="text/javascript" src="lesson_2_name_the_note.js"></script>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -63,7 +65,7 @@
       <input type="checkbox" name="halftone" id="halftone" value="false" onclick="toggleHalftone()"/><label for="halftone">Halftone</label><br/>
     </td>
     <td>
-      <select name="lesson" id="lesson" onchange="start()">
+      <select name="lesson" id="lesson" onchange="initialize()">
         <option value="NAME_THE_NOTE" selected>Name the note</option>
         <option value="NOTE_NAMES">Note names</option>
         <option value="TONE_HALFTONE">Tone / Halftone</option>
