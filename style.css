@@ -5,13 +5,17 @@
 .task-container {
   text-align: center;
   width: 1168px;
+  padding: 50px 0;
 }
 .task {
+  text-align: center;
+  width: 1168px;
   font-size: 62px;
 }
 .task-description {
   text-align: center;
   width: 1168px;
+  padding: 50px 0;
 }
 .title {
   font-size: 48px;
@@ -51,8 +55,9 @@
   background-color: #b00;
 }
 .settings {
-  border: 0;
   width: 1168px;
+  border: 1px solid black;
+  margin-top: 50px;
 }
 
 .button {

@@ -1,4 +1,3 @@
-let whites = true;
 let sharp = false;
 let flat = false;
 let tone = false;
@@ -9,10 +8,6 @@ let correct = 0;
 let total = 0;
 const BUTTONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
-function toggleWhites() {
-  whites = !whites;
-  initialize();
-}
 function toggleSharp() {
   sharp = !sharp;
   initialize();
@@ -31,12 +26,6 @@ function toggleHalftone() {
 }
 
 function initialize() {
-  if (!whites && !sharp && !flat) {
-    alert("Please select at least one type of notes (whites, sharp, flat)");
-    whites = true;
-    document.getElementById("whites").checked = true;
-  }
-
   const selectedLesson = getSelectedLesson();
   printDescription(selectedLesson.displayName + " - " + selectedLesson.description);
   startLesson(selectedLesson);
@@ -49,7 +38,7 @@ function getSelectedLesson() {
 
 function startLesson(lesson) {
   resetNotesColor();
-  printTask('');
+  printTask('...');
   updateScores();
 
   switch (lesson) {

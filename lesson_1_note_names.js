@@ -9,7 +9,7 @@ function runNoteNames() {
 
   highlightRandomOctave();
 
-  taskNote = getRandomNote(selectedOctave, whites, sharp, flat);
+  taskNote = getRandomNote(selectedOctave, sharp, flat);
 
   printTask(taskNote.print());
 }

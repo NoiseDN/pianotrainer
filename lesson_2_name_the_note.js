@@ -7,7 +7,7 @@ function runNameTheNote() {
 
   showButtons();
 
-  taskNote = getRandomNote(getRandomOctave(), whites, sharp, flat);
+  taskNote = getRandomNote(getRandomOctave(), sharp, flat);
 
   findNode(taskNote).classList.add("selected");
 }

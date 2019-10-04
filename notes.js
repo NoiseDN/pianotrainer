@@ -84,11 +84,13 @@ function getNote(noteName, octave, sharp, flat) {
       n.octave === octave && n.sharp === sharp && n.flat === flat);
 }
 
-function getRandomNote(octave, includeWhite, includeSharp, includeFlat) {
+function getRandomNote(octave, includeSharp, includeFlat) {
   let notes = [];
   const octaveNotes = NOTES.filter(n => n.octave === octave);
 
-  notes = notes.concat(octaveNotes.filter(n => includeWhite ? n.white : false));
+  // always include white notes
+  notes = notes.concat(octaveNotes.filter(n => n.white));
+
   notes = notes.concat(octaveNotes.filter(n => includeSharp ? n.sharp : false));
   notes = notes.concat(octaveNotes.filter(n => includeFlat ? n.flat : false));
 

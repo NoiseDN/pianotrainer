@@ -39,8 +39,8 @@
 <section class="task-description">
   <div id="description" class="title"></div>
 </section>
+<section id="task_note" class="task"></section>
 <section class="task-container">
-  <div id="task_note" class="task"></div>
   <div id="note_buttons">
     <script type="text/javascript">
       const buttons = getRandomButtons();
@@ -53,15 +53,19 @@
 <table class="settings">
   <tr>
     <td>
-      <input type="checkbox" name="whites" id="whites" checked onclick="toggleWhites()"/><label for="whites">Whites</label><br/>
-      <input type="checkbox" name="sharp" id="sharp" onclick="toggleSharp()"/><label for="sharp">Sharp</label><br/>
-      <input type="checkbox" name="flat" id="flat" onclick="toggleFlat()"/><label for="flat">Flat</label><br/><br/>
+      <input type="checkbox" name="sharp" id="sharp" onclick="toggleSharp()"/><label for="sharp">Sharp</label>
     </td>
     <td>
-      <input type="checkbox" name="tone" id="tone" onclick="toggleTone()"/><label for="tone">Tone</label><br/>
-      <input type="checkbox" name="halftone" id="halftone" value="false" onclick="toggleHalftone()"/><label for="halftone">Halftone</label><br/>
+      <input type="checkbox" name="flat" id="flat" onclick="toggleFlat()"/><label for="flat">Flat</label>
     </td>
     <td>
+      <input type="checkbox" name="tone" id="tone" onclick="toggleTone()"/><label for="tone">Tone</label>
+    </td>
+    <td>
+      <input type="checkbox" name="halftone" id="halftone" value="false" onclick="toggleHalftone()"/><label for="halftone">Halftone</label>
+    </td>
+    <td>
+      <label for="lesson">Lesson: </label>
       <select name="lesson" id="lesson" onchange="initialize()">
         <option value="NAME_THE_NOTE" selected>Name the note</option>
         <option value="NOTE_NAMES">Note names</option>
@@ -70,10 +74,10 @@
         <option value="BUILD_ACCORD">Build accord</option>
       </select>
     </td>
+    <td>
+      Score: <span id="correct">0</span>/<span id="total">0</span>
+    </td>
   </tr>
 </table>
-<section class="statistics">
-  Score: <span id="correct">0</span>/<span id="total">0</span>
-</section>
 </body>
 </html>
