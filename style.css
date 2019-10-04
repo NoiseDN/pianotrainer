@@ -9,6 +9,13 @@
 .task {
   font-size: 62px;
 }
+.task-description {
+  text-align: center;
+  width: 1168px;
+}
+.title {
+  font-size: 48px;
+}
 .note {
   border: 2px solid black;
 }
@@ -40,9 +47,10 @@
 .note.wrong {
   background-color: #b00;
 }
-/*.taskNote.black:hover {*/
-  /*background-color: #222;*/
-/*}*/
+.settings {
+  border: 0;
+  width: 1168px;
+}
 
 .note.black.c1 { left: 70px; }
 .note.black.d1 { left: 153px; }

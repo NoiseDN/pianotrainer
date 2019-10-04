@@ -59,7 +59,7 @@ function start() {
     document.getElementById("whites").checked = true;
   }
   selectedLesson = getSelectedLesson();
-  findTaskContainer().innerHTML = selectedLesson.displayName;
+  findDescriptionContainer().innerHTML = selectedLesson.displayName + " - " + selectedLesson.description;
 
   setTimeout(() => {
     play();
@@ -92,16 +92,16 @@ function play() {
 function runNoteNames() {
   taskNote = getRandomNote(selectedOctave, whites, sharp, flat);
 
-  findTaskContainer().innerHTML = taskNote.print();
+  findTaskNoteContainer().innerHTML = taskNote.print();
 }
 
 function end(success) {
-  const taskContainer = findTaskContainer();
+  const taskNoteContainer = findTaskNoteContainer();
 
   if (success) {
-    taskContainer.innerHTML = taskContainer.innerHTML + " - Correct! :)";
+    taskNoteContainer.innerHTML = taskNoteContainer.innerHTML + " - Correct! :)";
   } else {
-    taskContainer.innerHTML = pressedNote.print() + " - Wrong! :(";
+    taskNoteContainer.innerHTML = pressedNote.print() + " - Wrong! :(";
   }
 
   setTimeout(() => {
@@ -109,8 +109,12 @@ function end(success) {
   }, 2000);
 }
 
-function findTaskContainer() {
-  return document.getElementById("task_name");
+function findTaskNoteContainer() {
+  return document.getElementById("task_note");
+}
+
+function findDescriptionContainer() {
+  return document.getElementById("description");
 }
 
 function findNode(note) {

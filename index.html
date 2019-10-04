@@ -34,23 +34,33 @@
   <div id="note_A2#" class="note black a2" onclick="hit('a', 2, true)"></div>
   <div id="note_B2" class="note white" onclick="hit('b', 2)"></div>
 </section>
+<section class="task-description">
+  <div id="description" class="title"></div>
+</section>
 <section class="task-container">
-  <div id="task_name" class="task"></div>
+  <div id="task_note" class="task"></div>
 </section>
-<section id="settings">
-  <input type="checkbox" name="whites" id="whites" checked onclick="toggleWhites()"/><label for="whites">Whites</label><br/>
-  <input type="checkbox" name="sharp" id="sharp" onclick="toggleSharp()"/><label for="sharp">Sharp</label><br/>
-  <input type="checkbox" name="flat" id="flat" onclick="toggleFlat()"/><label for="flat">Flat</label><br/><br/>
-  <input type="checkbox" name="tone" id="tone" onclick="toggleTone()"/><label for="tone">Tone</label><br/>
-  <input type="checkbox" name="halftone" id="halftone" value="false" onclick="toggleHalftone()"/><label for="halftone">Halftone</label><br/>
-
-  <select name="lesson" id="lesson" onchange="start()">
-    <option value="NOTE_NAMES" selected>Note names</option>
-    <option value="NAME_THE_NOTE">Name the note</option>
-    <option value="TONE_HALFTONE">Tone / Halftone</option>
-    <option value="NAME_ACCORD">Name accord</option>
-    <option value="BUILD_ACCORD">Build accord</option>
-  </select>
-</section>
+<table class="settings">
+  <tr>
+    <td>
+      <input type="checkbox" name="whites" id="whites" checked onclick="toggleWhites()"/><label for="whites">Whites</label><br/>
+      <input type="checkbox" name="sharp" id="sharp" onclick="toggleSharp()"/><label for="sharp">Sharp</label><br/>
+      <input type="checkbox" name="flat" id="flat" onclick="toggleFlat()"/><label for="flat">Flat</label><br/><br/>
+    </td>
+    <td>
+      <input type="checkbox" name="tone" id="tone" onclick="toggleTone()"/><label for="tone">Tone</label><br/>
+      <input type="checkbox" name="halftone" id="halftone" value="false" onclick="toggleHalftone()"/><label for="halftone">Halftone</label><br/>
+    </td>
+    <td>
+      <select name="lesson" id="lesson" onchange="start()">
+        <option value="NOTE_NAMES" selected>Note names</option>
+        <option value="NAME_THE_NOTE">Name the note</option>
+        <option value="TONE_HALFTONE">Tone / Halftone</option>
+        <option value="NAME_ACCORD">Name accord</option>
+        <option value="BUILD_ACCORD">Build accord</option>
+      </select>
+    </td>
+  </tr>
+</table>
 </body>
 </html>
