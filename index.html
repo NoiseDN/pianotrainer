@@ -42,15 +42,12 @@
 <section class="task-container">
   <div id="task_note" class="task"></div>
   <div id="note_buttons">
-    <!-- TODO randomize buttons order -->
-    <div id="note_button_c" class="button" onclick="selectNote('B')">B</div>
-    <div id="note_button_d" class="button" onclick="selectNote('G')">G</div>
-    <div id="note_button_e" class="button" onclick="selectNote('E')">E</div>
-    <div id="note_button_f" class="button" onclick="selectNote('F')">F</div>
-    <div id="note_button_g" class="button" onclick="selectNote('D')">D</div>
-    <div id="note_button_a" class="button" onclick="selectNote('A')">A</div>
-    <div id="note_button_b" class="button" onclick="selectNote('C')">C</div>
-    <!-- TODO support sharp and flat notes -->
+    <script type="text/javascript">
+      const buttons = getRandomButtons();
+      for (let i = 0; i < buttons.length; i++) {
+        document.write("<div class=\"button\" onclick=\"selectNote('" + buttons[i] + "')\">" + buttons[i] + "</div>");
+      }
+    </script>
   </div>
 </section>
 <table class="settings">

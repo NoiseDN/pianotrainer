@@ -7,6 +7,7 @@ let clickable = false;
 let taskNote, pressedNote, selectedOctave;
 let correct = 0;
 let total = 0;
+const BUTTONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
 function toggleWhites() {
   whites = !whites;
@@ -100,6 +101,10 @@ function findNode(note) {
     node = document.getElementById("note_" + findSame(note).print(true));
   }
   return node;
+}
+
+function getRandomButtons() {
+  return shuffle(BUTTONS);
 }
 
 window.onload = function() {
