@@ -6,32 +6,33 @@ function runNoteNames() {
   clickable = true;
 
   hideButtons();
-
   highlightRandomOctave();
 
-  taskNote = getRandomNote(selectedOctave, sharp, flat);
+  // save note globally
+  taskNote = getRandomNote(selectedOctave);
 
-  printTask(taskNote.print());
+  printTask(taskNote.name);
 }
 
 function hit(noteName, octave, sharp = false, flat = false) {
   if (!clickable) {
     return;
   }
+
+  // save note globally
   pressedNote = getNote(noteName, octave, sharp, flat);
 
-  const pressedNode = findNode(pressedNote);
+  const pressedEl = findElement(pressedNote);
+  pressedEl.classList.remove('active');
   if (pressedNote.equals(taskNote)) {
-    pressedNode.classList.remove('active');
-    pressedNode.classList.add('correct');
-    printTask(taskNote.print()  + " - Correct! :)")
+    pressedEl.classList.add('correct');
+    printTask(taskNote.name  + " - Correct! :)")
   } else {
-    pressedNode.classList.remove('active');
-    pressedNode.classList.add('wrong');
-    const taskNode = findNode(taskNote);
+    pressedEl.classList.add('wrong');
+    const taskNode = findElement(taskNote);
     taskNode.classList.remove('active');
     taskNode.classList.add('correct');
-    printTask(pressedNote.print() + " - Wrong! :(");
+    printTask(pressedNote.name + " - Wrong! :(");
   }
 
   setTimeout(() => {

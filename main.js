@@ -6,7 +6,6 @@ let clickable = false;
 let taskNote, pressedNote, selectedOctave;
 let correct = 0;
 let total = 0;
-const BUTTONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
 function toggleSharp() {
   sharp = !sharp;
@@ -81,19 +80,29 @@ function hideButtons() {
   document.getElementById('note_buttons').style.display = 'none';
 }
 
-function findNode(note) {
+function findElement(note) {
   if (!note) {
     throw 'Cannot find undefined note';
   }
-  let node = document.getElementById("note_" + note.print(true));
+  let node = document.getElementById("note_" + note.toStr());
   if (!node) {
-    node = document.getElementById("note_" + findSame(note).print(true));
+    node = document.getElementById("note_" + findSame(note).toStr());
   }
   return node;
 }
 
 function getRandomButtons() {
-  return shuffle(BUTTONS);
+  let buttons = [];
+
+  const octaveNotes = NOTES.filter(n => n.octave === 1);
+
+  // always include white notes
+  buttons = buttons.concat(octaveNotes.filter(n => n.white));
+
+  buttons = buttons.concat(octaveNotes.filter(n => sharp ? n.sharp : false));
+  buttons = buttons.concat(octaveNotes.filter(n => flat ? n.flat : false));
+
+  return shuffle(buttons.map(b => b.name));
 }
 
 window.onload = function() {
