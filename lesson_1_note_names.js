@@ -14,16 +14,10 @@ function runNoteNames() {
   printTask(taskKey.note);
 }
 
-function hit(key) {
-  if (!pianoClickable || !key) {
-    return;
-  }
-
-  // save key globally
-  pressedKey = key;
-
+function verifyPressed() {
   const pressedEl = findElement(pressedKey);
   pressedEl.classList.remove('active');
+
   if (pressedKey.equals(taskKey)) {
     pressedEl.classList.add('correct');
     printTask(taskKey.note  + " - Correct! :)");
@@ -35,11 +29,6 @@ function hit(key) {
     taskNode.classList.add('correct');
     printTask(pressedKey.note + " - Wrong! :(");
   }
-  total++;
-
-  setTimeout(() => {
-    startLesson(LESSON.NOTE_NAMES);
-  }, 1000);
 }
 
 function highlightRandomOctave() {

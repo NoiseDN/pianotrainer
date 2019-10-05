@@ -1,7 +1,5 @@
 let sharp = false;
 let flat = false;
-let tone = false;
-let halftone = false;
 let pianoClickable = false;
 let buttonsClickable = false;
 let randomButtons = false;
@@ -18,14 +16,33 @@ function toggleFlat() {
   flat = !flat;
   initialize();
 }
-function toggleTone() {
-  tone = !tone;
-  initialize();
+
+function hit(key) {
+  if (!pianoClickable || !key) {
+    return;
+  }
+
+  // save key globally
+  pressedKey = key;
+
+  switch (getSelectedLesson()) {
+    case LESSON.NOTE_NAMES:
+      verifyPressed();
+      break;
+    case LESSON.TONE_SEMITONE:
+      verifyPressed();
+      break;
+    default:
+      throw 'Lesson ' + getSelectedLesson() + ' not implemented'
+  }
+
+  total++;
+
+  setTimeout(() => {
+    startLesson();
+  }, 1000);
 }
-function toggleHalftone() {
-  halftone = !halftone;
-  initialize();
-}
+
 function toggleRandomButtons() {
   randomButtons = !randomButtons;
   initialize();
@@ -33,11 +50,10 @@ function toggleRandomButtons() {
 
 function initialize() {
   renderPiano();
-  const selectedLesson = getSelectedLesson();
-  printDescription(selectedLesson.displayName + " - " + selectedLesson.description);
+  printDescription(getSelectedLesson().displayName + " - " + getSelectedLesson().description);
   resetScore();
   startTimer();
-  startLesson(selectedLesson);
+  startLesson();
 }
 
 function renderPiano() {
@@ -66,20 +82,24 @@ function getSelectedLesson() {
   return findLesson(document.getElementsByTagName("option")[lessonIndex].value);
 }
 
-function startLesson(lesson) {
+function startLesson() {
   resetKeyColor();
   printTask('...');
   updateScore();
+  hideSettings();
 
-  switch (lesson) {
+  switch (getSelectedLesson()) {
     case LESSON.NOTE_NAMES:
       runNoteNames();
     break;
     case LESSON.NAME_THE_NOTE:
       runNameTheNote();
     break;
+    case LESSON.TONE_SEMITONE:
+      runToneSemitone();
+    break;
     default:
-      throw 'Lesson ' + lesson + ' not implemented'
+      throw 'Lesson ' + getSelectedLesson() + ' not implemented'
   }
 }
 
@@ -91,7 +111,12 @@ function resetKeyColor() {
 }
 
 function printTask(text) {
-  return document.getElementById("task_note").innerHTML = text;
+  document.getElementById("task_note").style.display = 'block';
+  document.getElementById("task_note").innerHTML = text;
+}
+
+function hideTask() {
+  document.getElementById("task_note").style.display = 'none';
 }
 
 function updateScore() {

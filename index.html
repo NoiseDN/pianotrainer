@@ -1,11 +1,13 @@
 <html>
 <head>
+  <title>Open piano trainer</title>
   <script type="text/javascript" src="keys.js"></script>
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="util.js"></script>
   <script type="text/javascript" src="lessons.js"></script>
   <script type="text/javascript" src="lesson_1_note_names.js"></script>
   <script type="text/javascript" src="lesson_2_name_the_note.js"></script>
+  <script type="text/javascript" src="lesson_3_tone_semitone.js"></script>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -25,11 +27,11 @@
     <td>
       <input type="checkbox" name="flat" id="flat" onclick="toggleFlat()"/><label for="flat">Flat</label>
     </td>
-    <td>
-      <input type="checkbox" name="tone" id="tone" onclick="toggleTone()"/><label for="tone">Tone</label>
+    <td id="lesson3-tone">
+      <input type="radio" name="lesson3" value="tone" id="tone" checked onclick="setTone()"/><label for="tone">Tone</label>
     </td>
-    <td>
-      <input type="checkbox" name="halftone" id="halftone" onclick="toggleHalftone()"/><label for="halftone">Halftone</label>
+    <td id="lesson3-semitone">
+      <input type="radio" name="lesson3" value="semitone" id="semitone" onclick="setSemitone()"/><label for="semitone">Semitone</label>
     </td>
     <td>
       <label for="lesson">Lesson: </label>

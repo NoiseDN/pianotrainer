@@ -26,13 +26,13 @@ function selectNote(noteName) {
     correct++;
   } else {
     printTask(noteName + " - Wrong! :(");
-    const selectedKey = getKey(noteName, 1, false, false);
+    const selectedKey = getKey(noteName, 1);
     findElement(selectedKey).classList.add('wrong');
   }
   total++;
 
   setTimeout(() => {
-    startLesson(LESSON.NAME_THE_NOTE);
+    startLesson();
   }, 1000);
 }
 
@@ -72,5 +72,4 @@ function getButtons() {
   buttons = buttons.concat(octaveKeys.filter(k => flat ? k.flat : false));
 
   return buttons;
-
 }
