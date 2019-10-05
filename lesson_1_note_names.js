@@ -3,7 +3,7 @@
  *  Objective: learn a note placement on a piano
  */
 function runNoteNames() {
-  clickable = true;
+  pianoClickable = true;
 
   hideButtons();
   highlightRandomOctave();
@@ -15,7 +15,7 @@ function runNoteNames() {
 }
 
 function hit(noteName, octave, sharp = false, flat = false) {
-  if (!clickable) {
+  if (!pianoClickable) {
     return;
   }
 
@@ -27,6 +27,7 @@ function hit(noteName, octave, sharp = false, flat = false) {
   if (pressedNote.equals(taskNote)) {
     pressedEl.classList.add('correct');
     printTask(taskNote.name  + " - Correct! :)")
+    correct++;
   } else {
     pressedEl.classList.add('wrong');
     const taskNode = findElement(taskNote);
@@ -34,10 +35,11 @@ function hit(noteName, octave, sharp = false, flat = false) {
     taskNode.classList.add('correct');
     printTask(pressedNote.name + " - Wrong! :(");
   }
+  total++;
 
   setTimeout(() => {
     startLesson(LESSON.NOTE_NAMES);
-  }, 2000);
+  }, 1000);
 }
 
 function highlightRandomOctave() {

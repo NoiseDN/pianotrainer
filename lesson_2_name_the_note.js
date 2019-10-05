@@ -3,7 +3,8 @@
  *  Objective: learn notes and their placement
  */
 function runNameTheNote() {
-  clickable = false;
+  pianoClickable = false;
+  buttonsClickable = true;
 
   renderButtons();
   showButtons();
@@ -15,6 +16,10 @@ function runNameTheNote() {
 }
 
 function selectNote(noteName) {
+  if (!buttonsClickable) {
+    return;
+  }
+  buttonsClickable = false;
   findElement(taskNote).classList.add('correct');
   if (taskNote.name === noteName || taskNote.sameAs(noteName)) {
     printTask(noteName + " - Correct! :)");
@@ -28,7 +33,7 @@ function selectNote(noteName) {
 
   setTimeout(() => {
     startLesson(LESSON.NAME_THE_NOTE);
-  }, 2000);
+  }, 1000);
 }
 
 function renderButtons() {

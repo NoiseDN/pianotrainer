@@ -40,8 +40,8 @@
   <div id="description" class="title"></div>
 </section>
 <section id="task_note" class="task"></section>
-<section class="task-container">
-  <div id="note_buttons"></div>
+<section id="task-container" class="task-container">
+  <span id="note_buttons" class="buttons"></span>
 </section>
 <table class="settings">
   <tr>
@@ -66,6 +66,9 @@
         <option value="NAME_ACCORD">Name accord</option>
         <option value="BUILD_ACCORD">Build accord</option>
       </select>
+    </td>
+    <td>
+      Time: <span id="minutes">00</span>:<span id="seconds">00</span></span>
     </td>
     <td>
       Score: <span id="correct">0</span>/<span id="total">0</span>
