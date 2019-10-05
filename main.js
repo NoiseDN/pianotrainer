@@ -4,7 +4,7 @@ let tone = false;
 let halftone = false;
 let pianoClickable = false;
 let buttonsClickable = false;
-let taskNote, pressedNote, selectedOctave;
+let taskKey, pressedKey, selectedOctave;
 let correct = 0;
 let total = 0;
 let clock;
@@ -27,11 +27,33 @@ function toggleHalftone() {
 }
 
 function initialize() {
+  renderPiano();
   const selectedLesson = getSelectedLesson();
   printDescription(selectedLesson.displayName + " - " + selectedLesson.description);
   resetScore();
   startTimer();
   startLesson(selectedLesson);
+}
+
+function renderPiano() {
+  const container = document.getElementById('piano');
+  container.innerHTML = '';
+
+  for (let i = 0; i < KEYS.length; i++) {
+    const key = KEYS[i];
+    if (key.note.endsWith('b')) {
+      continue;
+    }
+    let noteEl = document.createElement("div");
+    noteEl.classList.add('key');
+    noteEl.classList.add(key.white ? 'white' : 'black');
+    if (!key.white) {
+      noteEl.classList.add(key.note.substr(0, 1).toLowerCase() + key.octave);
+    }
+    noteEl.setAttribute('id', 'key_' + key.note + key.octave);
+    noteEl.addEventListener('click', () => hit(key));
+    container.appendChild(noteEl);
+  }
 }
 
 function getSelectedLesson() {
@@ -40,7 +62,7 @@ function getSelectedLesson() {
 }
 
 function startLesson(lesson) {
-  resetNotesColor();
+  resetKeyColor();
   printTask('...');
   updateScore();
 
@@ -56,10 +78,10 @@ function startLesson(lesson) {
   }
 }
 
-function resetNotesColor() {
-  let notes = document.getElementsByClassName("note");
-  for (let i = 0; i < notes.length; i++) {
-    notes[i].classList.remove('active', 'selected', 'correct', 'wrong');
+function resetKeyColor() {
+  const keys = document.getElementsByClassName("key");
+  for (let i = 0; i < keys.length; i++) {
+    keys[i].classList.remove('active', 'selected', 'correct', 'wrong');
   }
 }
 
@@ -89,29 +111,29 @@ function hideButtons() {
   document.getElementById('task-container').style.display = 'none';
 }
 
-function findElement(note) {
-  if (!note) {
-    throw 'Cannot find undefined note';
+function findElement(key) {
+  if (!key) {
+    throw 'Cannot find undefined key';
   }
-  let node = document.getElementById("note_" + note.toStr());
-  if (!node) {
-    node = document.getElementById("note_" + findSame(note).toStr());
+  let element = document.getElementById("key_" + key.toStr());
+  if (!element) {
+    element = document.getElementById("key_" + findSame(key.note).toStr());
   }
-  return node;
+  return element;
 }
 
 function getRandomButtons() {
   let buttons = [];
 
-  const octaveNotes = NOTES.filter(n => n.octave === 1);
+  const octaveKeys = KEYS.filter(n => n.octave === 1);
 
   // always include white notes
-  buttons = buttons.concat(octaveNotes.filter(n => n.white));
+  buttons = buttons.concat(octaveKeys.filter(k => k.white));
 
-  buttons = buttons.concat(octaveNotes.filter(n => sharp ? n.sharp : false));
-  buttons = buttons.concat(octaveNotes.filter(n => flat ? n.flat : false));
+  buttons = buttons.concat(octaveKeys.filter(k => sharp ? k.sharp : false));
+  buttons = buttons.concat(octaveKeys.filter(k => flat ? k.flat : false));
 
-  return shuffle(buttons.map(b => b.name));
+  return shuffle(buttons.map(k => k.note));
 }
 
 function startTimer() {

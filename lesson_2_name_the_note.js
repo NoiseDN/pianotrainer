@@ -10,9 +10,9 @@ function runNameTheNote() {
   showButtons();
 
   // save note globally
-  taskNote = getRandomNote(getRandomOctave());
+  taskKey = getRandomKey(getRandomOctave());
 
-  findElement(taskNote).classList.add("selected");
+  findElement(taskKey).classList.add("selected");
 }
 
 function selectNote(noteName) {
@@ -20,14 +20,14 @@ function selectNote(noteName) {
     return;
   }
   buttonsClickable = false;
-  findElement(taskNote).classList.add('correct');
-  if (taskNote.name === noteName || taskNote.sameAs(noteName)) {
+  findElement(taskKey).classList.add('correct');
+  if (taskKey.note === noteName || taskKey.sameAs(noteName)) {
     printTask(noteName + " - Correct! :)");
     correct++;
   } else {
     printTask(noteName + " - Wrong! :(");
-    const selectedNote = getNote(noteName, 1, false, false);
-    findElement(selectedNote).classList.add('wrong');
+    const selectedKey = getKey(noteName, 1, false, false);
+    findElement(selectedKey).classList.add('wrong');
   }
   total++;
 

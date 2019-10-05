@@ -1,6 +1,6 @@
 /**
- *  Lesson: Note names
- *  Objective: learn a note placement on a piano
+ *  Lesson: Key names
+ *  Objective: learn the notes placement on a piano
  */
 function runNoteNames() {
   pianoClickable = true;
@@ -9,31 +9,31 @@ function runNoteNames() {
   highlightRandomOctave();
 
   // save note globally
-  taskNote = getRandomNote(selectedOctave);
+  taskKey = getRandomKey(selectedOctave);
 
-  printTask(taskNote.name);
+  printTask(taskKey.note);
 }
 
-function hit(noteName, octave, sharp = false, flat = false) {
-  if (!pianoClickable) {
+function hit(key) {
+  if (!pianoClickable || !key) {
     return;
   }
 
-  // save note globally
-  pressedNote = getNote(noteName, octave, sharp, flat);
+  // save key globally
+  pressedKey = key;
 
-  const pressedEl = findElement(pressedNote);
+  const pressedEl = findElement(pressedKey);
   pressedEl.classList.remove('active');
-  if (pressedNote.equals(taskNote)) {
+  if (pressedKey.equals(taskKey)) {
     pressedEl.classList.add('correct');
-    printTask(taskNote.name  + " - Correct! :)")
+    printTask(taskKey.note  + " - Correct! :)");
     correct++;
   } else {
     pressedEl.classList.add('wrong');
-    const taskNode = findElement(taskNote);
+    const taskNode = findElement(taskKey);
     taskNode.classList.remove('active');
     taskNode.classList.add('correct');
-    printTask(pressedNote.name + " - Wrong! :(");
+    printTask(pressedKey.note + " - Wrong! :(");
   }
   total++;
 
@@ -45,12 +45,12 @@ function hit(noteName, octave, sharp = false, flat = false) {
 function highlightRandomOctave() {
   selectedOctave = getRandomOctave();
 
-  const notes = document.getElementsByClassName("note");
-  for (let i = 0; i < notes.length; i++) {
-    const note = notes[i];
-    note.classList.remove('active');
-    if (note.getAttribute('id').indexOf(selectedOctave + '') !== -1) {
-      note.classList.add('active');
+  const keys = document.getElementsByClassName("key");
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    key.classList.remove('active');
+    if (key.getAttribute('id').indexOf(selectedOctave + '') !== -1) {
+      key.classList.add('active');
     }
   }
 }

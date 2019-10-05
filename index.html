@@ -1,6 +1,6 @@
 <html>
 <head>
-  <script type="text/javascript" src="notes.js"></script>
+  <script type="text/javascript" src="keys.js"></script>
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="util.js"></script>
   <script type="text/javascript" src="lessons.js"></script>
@@ -9,33 +9,7 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<section class="piano">
-  <div id="note_C1" class="note white" onclick="hit('C', 1)"></div>
-  <div id="note_C#1" class="note black c1" onclick="hit('C', 1, true)"></div>
-  <div id="note_D1" class="note white" onclick="hit('D', 1)"></div>
-  <div id="note_D#1" class="note black d1" onclick="hit('D', 1, true)"></div>
-  <div id="note_E1" class="note white" onclick="hit('E', 1)"></div>
-  <div id="note_F1" class="note white" onclick="hit('F', 1)"></div>
-  <div id="note_F#1" class="note black f1" onclick="hit('F', 1, true)"></div>
-  <div id="note_G1" class="note white" onclick="hit('G', 1)"></div>
-  <div id="note_G#1" class="note black g1" onclick="hit('G', 1, true)"></div>
-  <div id="note_A1" class="note white" onclick="hit('A', 1)"></div>
-  <div id="note_A#1" class="note black a1" onclick="hit('A', 1, true)"></div>
-  <div id="note_B1" class="note white" onclick="hit('B', 1)"></div>
-
-  <div id="note_C2" class="note white" onclick="hit('C', 2)"></div>
-  <div id="note_C#2" class="note black c2" onclick="hit('C', 2, true)"></div>
-  <div id="note_D2" class="note white" onclick="hit('D', 2)"></div>
-  <div id="note_D#2" class="note black d2" onclick="hit('D', 2, true)"></div>
-  <div id="note_E2" class="note white" onclick="hit('E', 2)"></div>
-  <div id="note_F2" class="note white" onclick="hit('F', 2)"></div>
-  <div id="note_F#2" class="note black f2" onclick="hit('F', 2, true)"></div>
-  <div id="note_G2" class="note white" onclick="hit('G', 2)"></div>
-  <div id="note_G#2" class="note black g2" onclick="hit('G', 2, true)"></div>
-  <div id="note_A2" class="note white" onclick="hit('A', 2)"></div>
-  <div id="note_A#2" class="note black a2" onclick="hit('A', 2, true)"></div>
-  <div id="note_B2" class="note white" onclick="hit('B', 2)"></div>
-</section>
+<section class="piano" id="piano"></section>
 <section class="task-description">
   <div id="description" class="title"></div>
 </section>
@@ -62,7 +36,7 @@
       <select name="lesson" id="lesson" onchange="initialize()">
         <option value="NAME_THE_NOTE" selected>Name the note</option>
         <option value="NOTE_NAMES">Note names</option>
-        <option value="TONE_HALFTONE">Tone / Halftone</option>
+        <option value="TONE_SEMITONE">Tone / Semitone</option>
         <option value="NAME_ACCORD">Name accord</option>
         <option value="BUILD_ACCORD">Build accord</option>
       </select>

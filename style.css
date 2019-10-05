@@ -20,23 +20,23 @@
 .title {
   font-size: 48px;
 }
-.note {
+.key {
   border: 2px solid black;
 }
-.note.white {
+.key.white {
   border-right-width: 0;
   width: 80px;
   height: 200px;
   display: inline-block;
   cursor: pointer;
 }
-.note.white.active, .note.white.selected {
+.key.white.active, .key.white.selected {
   background-color: #dd9;
 }
-.note.white:last-child {
+.key.white:last-child {
   border-right-width: 2px;
 }
-.note.black {
+.key.black {
   border-top-width: 0;
   width: 40px;
   height: 140px;
@@ -45,13 +45,13 @@
   top: 10px;
   cursor: pointer;
 }
-.note.black.selected {
+.key.black.selected {
   background-color: #666;
 }
-.note.correct {
+.key.correct {
   background-color: #0b0 !important;
 }
-.note.wrong {
+.key.wrong {
   background-color: #b00;
 }
 .settings {
@@ -81,13 +81,13 @@
   background-color: darkgrey;
 }
 
-.note.black.c1 { left: 70px; }
-.note.black.d1 { left: 153px; }
-.note.black.f1 { left: 316px; }
-.note.black.g1 { left: 399px; }
-.note.black.a1 { left: 481px; }
-.note.black.c2 { left: 645px; }
-.note.black.d2 { left: 728px; }
-.note.black.f2 { left: 891px; }
-.note.black.g2 { left: 974px; }
-.note.black.a2 { left: 1055px; }
+.key.black.c1 { left: 70px; }
+.key.black.d1 { left: 153px; }
+.key.black.f1 { left: 316px; }
+.key.black.g1 { left: 399px; }
+.key.black.a1 { left: 481px; }
+.key.black.c2 { left: 645px; }
+.key.black.d2 { left: 728px; }
+.key.black.f2 { left: 891px; }
+.key.black.g2 { left: 974px; }
+.key.black.a2 { left: 1055px; }
