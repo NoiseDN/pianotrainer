@@ -39,7 +39,7 @@ function selectNote(noteName) {
 function renderButtons() {
   const container = document.getElementById('note_buttons');
   container.innerHTML = '';
-  const buttons = getRandomButtons();
+  const buttons = randomButtons ? getRandomButtons() : getSortedButtons();
 
   for (let i = 0; i < buttons.length; i++) {
     let button = document.createElement("div");
@@ -48,4 +48,29 @@ function renderButtons() {
     button.innerHTML = buttons[i];
     container.appendChild(button);
   }
+}
+
+function getRandomButtons() {
+  return shuffle(getButtons().map(k => k.note));
+}
+
+function getSortedButtons() {
+  return getButtons()
+    .sort((a, b) => b.order - a.order)
+    .map(k => k.note);
+}
+
+function getButtons() {
+  let buttons = [];
+
+  const octaveKeys = KEYS.filter(n => n.octave === 1);
+
+  // always include white notes
+  buttons = buttons.concat(octaveKeys.filter(k => k.white));
+
+  buttons = buttons.concat(octaveKeys.filter(k => sharp ? k.sharp : false));
+  buttons = buttons.concat(octaveKeys.filter(k => flat ? k.flat : false));
+
+  return buttons;
+
 }

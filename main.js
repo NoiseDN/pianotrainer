@@ -4,6 +4,7 @@ let tone = false;
 let halftone = false;
 let pianoClickable = false;
 let buttonsClickable = false;
+let randomButtons = false;
 let taskKey, pressedKey, selectedOctave;
 let correct = 0;
 let total = 0;
@@ -23,6 +24,10 @@ function toggleTone() {
 }
 function toggleHalftone() {
   halftone = !halftone;
+  initialize();
+}
+function toggleRandomButtons() {
+  randomButtons = !randomButtons;
   initialize();
 }
 
@@ -120,20 +125,6 @@ function findElement(key) {
     element = document.getElementById("key_" + findSame(key.note).toStr());
   }
   return element;
-}
-
-function getRandomButtons() {
-  let buttons = [];
-
-  const octaveKeys = KEYS.filter(n => n.octave === 1);
-
-  // always include white notes
-  buttons = buttons.concat(octaveKeys.filter(k => k.white));
-
-  buttons = buttons.concat(octaveKeys.filter(k => sharp ? k.sharp : false));
-  buttons = buttons.concat(octaveKeys.filter(k => flat ? k.flat : false));
-
-  return shuffle(buttons.map(k => k.note));
 }
 
 function startTimer() {

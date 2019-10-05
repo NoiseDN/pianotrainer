@@ -6,10 +6,11 @@ const OCTAVES = 2;
 const KEYS = [];
 
 class Key {
-  constructor(note, white, octave, sharp = false, flat = false) {
+  constructor(order, note, white, octave, sharp = false, flat = false) {
     if (sharp && flat) {
       throw 'Cannot create a Key both sharp and flat';
     }
+    this.order = order;
     this.note = note;
     this.white = white;
     this.octave = octave;
@@ -60,23 +61,23 @@ class Key {
 }
 
 for (let o = 1; o <= OCTAVES; o++) {
-  KEYS.push(new Key('C', true, o));
-  KEYS.push(new Key('C#', false, o, true, false));
-  KEYS.push(new Key('Db', false, o, false, true));
-  KEYS.push(new Key('D', true, o));
-  KEYS.push(new Key('D#', false,o, true, false));
-  KEYS.push(new Key('Eb', false,o, false, true));
-  KEYS.push(new Key('E', true, o));
-  KEYS.push(new Key('F', true, o));
-  KEYS.push(new Key('F#', false, o, true, false));
-  KEYS.push(new Key('Gb', false, o, false, true));
-  KEYS.push(new Key('G', true, o));
-  KEYS.push(new Key('G#', false, o, true, false));
-  KEYS.push(new Key('Ab', false, o, false, true));
-  KEYS.push(new Key('A', true, o));
-  KEYS.push(new Key('A#', false, o, true, false));
-  KEYS.push(new Key('Bb', false, o, false, true));
-  KEYS.push(new Key('B', true, o));
+  KEYS.push(new Key(3, 'C', true, o));
+  KEYS.push(new Key(9, 'C#', false, o, true, false));
+  KEYS.push(new Key(15, 'Db', false, o, false, true));
+  KEYS.push(new Key(4, 'D', true, o));
+  KEYS.push(new Key(10, 'D#', false,o, true, false));
+  KEYS.push(new Key(16, 'Eb', false,o, false, true));
+  KEYS.push(new Key(5, 'E', true, o));
+  KEYS.push(new Key(6, 'F', true, o));
+  KEYS.push(new Key(11, 'F#', false, o, true, false));
+  KEYS.push(new Key(17, 'Gb', false, o, false, true));
+  KEYS.push(new Key(7, 'G', true, o));
+  KEYS.push(new Key(12, 'G#', false, o, true, false));
+  KEYS.push(new Key(13, 'Ab', false, o, false, true));
+  KEYS.push(new Key(1, 'A', true, o));
+  KEYS.push(new Key(8, 'A#', false, o, true, false));
+  KEYS.push(new Key(14, 'Bb', false, o, false, true));
+  KEYS.push(new Key(2, 'B', true, o));
 }
 
 function getKey(noteName, octave, sharp, flat) {

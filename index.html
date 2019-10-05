@@ -29,7 +29,7 @@
       <input type="checkbox" name="tone" id="tone" onclick="toggleTone()"/><label for="tone">Tone</label>
     </td>
     <td>
-      <input type="checkbox" name="halftone" id="halftone" value="false" onclick="toggleHalftone()"/><label for="halftone">Halftone</label>
+      <input type="checkbox" name="halftone" id="halftone" onclick="toggleHalftone()"/><label for="halftone">Halftone</label>
     </td>
     <td>
       <label for="lesson">Lesson: </label>
@@ -40,6 +40,9 @@
         <option value="NAME_ACCORD">Name accord</option>
         <option value="BUILD_ACCORD">Build accord</option>
       </select>
+    </td>
+    <td>
+      <input type="checkbox" name="randomButtons" id="randomButtons" onclick="toggleRandomButtons()"/><label for="randomButtons">Random buttons</label>
     </td>
     <td>
       Time: <span id="minutes">00</span>:<span id="seconds">00</span></span>
