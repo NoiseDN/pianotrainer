@@ -3,6 +3,7 @@
   <title>Open piano trainer</title>
   <script type="text/javascript" src="keys.js"></script>
   <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="settings.js"></script>
   <script type="text/javascript" src="util.js"></script>
   <script type="text/javascript" src="lessons.js"></script>
   <script type="text/javascript" src="lesson_1_note_names.js"></script>
@@ -22,6 +23,9 @@
 <table class="settings">
   <tr>
     <td>
+      <input type="checkbox" name="white" id="white" checked onclick="toggleWhite()"/><label for="white">White</label>
+    </td>
+    <td>
       <input type="checkbox" name="sharp" id="sharp" onclick="toggleSharp()"/><label for="sharp">Sharp</label>
     </td>
     <td>
@@ -36,9 +40,9 @@
     <td>
       <label for="lesson">Lesson: </label>
       <select name="lesson" id="lesson" onchange="initialize()">
-        <option value="NAME_THE_NOTE" selected>Name the note</option>
-        <option value="NOTE_NAMES">Note names</option>
-        <option value="TONE_SEMITONE">Tone / Semitone</option>
+        <option value="NOTE_NAMES">1. Note names</option>
+        <option value="NAME_THE_NOTE" selected>2. Name the note</option>
+        <option value="TONE_SEMITONE">3. Tone / Semitone</option>
         <option value="NAME_ACCORD">Name accord</option>
         <option value="BUILD_ACCORD">Build accord</option>
       </select>

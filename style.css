@@ -30,8 +30,11 @@
   display: inline-block;
   cursor: pointer;
 }
-.key.white.active, .key.white.selected {
+.key.white.active, .key.white.selected, .key.black.selected {
   background-color: #dd9;
+}
+.key.white.debug, .key.black.debug {
+  background-color: lightgreen;
 }
 .key.white:last-child {
   border-right-width: 2px;
@@ -44,9 +47,6 @@
   position: absolute;
   top: 10px;
   cursor: pointer;
-}
-.key.black.selected {
-  background-color: #666;
 }
 .key.correct {
   background-color: #0b0 !important;
@@ -76,6 +76,9 @@
   background-color: lightgrey;
   font-size: 33px;
   margin-top: 15px;
+}
+.button.debug {
+  background-color: lightgreen;
 }
 .button:hover {
   background-color: darkgrey;

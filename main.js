@@ -1,21 +1,9 @@
-let sharp = false;
-let flat = false;
-let pianoClickable = false;
-let buttonsClickable = false;
-let randomButtons = false;
+const debug = true;
 let taskKey, pressedKey, selectedOctave;
-let correct = 0;
-let total = 0;
-let clock;
 
-function toggleSharp() {
-  sharp = !sharp;
-  initialize();
-}
-function toggleFlat() {
-  flat = !flat;
-  initialize();
-}
+//TODO: 1. support keyboard
+//TODO: 2. support MIDI-keyboard
+//TODO: 3. re-start lesson if task key is same as previous one
 
 function hit(key) {
   if (!pianoClickable || !key) {
@@ -27,10 +15,10 @@ function hit(key) {
 
   switch (getSelectedLesson()) {
     case LESSON.NOTE_NAMES:
-      verifyPressed();
+      lesson1_verifyPressed();
       break;
     case LESSON.TONE_SEMITONE:
-      verifyPressed();
+      lesson3_verifyPressed();
       break;
     default:
       throw 'Lesson ' + getSelectedLesson() + ' not implemented'
@@ -40,17 +28,11 @@ function hit(key) {
 
   setTimeout(() => {
     startLesson();
-  }, 1000);
-}
-
-function toggleRandomButtons() {
-  randomButtons = !randomButtons;
-  initialize();
+  }, debug ? 200 : 1000);
 }
 
 function initialize() {
   renderPiano();
-  printDescription(getSelectedLesson().displayName + " - " + getSelectedLesson().description);
   resetScore();
   startTimer();
   startLesson();
@@ -84,6 +66,12 @@ function getSelectedLesson() {
 
 function startLesson() {
   resetKeyColor();
+  if (!white && !sharp && !flat) {
+    printDescription('Please select lesson mode: White / Sharp / Flat');
+    hideTask();
+    return;
+  }
+  printDescription(getSelectedLesson().displayName + " - " + getSelectedLesson().description);
   printTask('...');
   updateScore();
   hideSettings();
@@ -106,7 +94,7 @@ function startLesson() {
 function resetKeyColor() {
   const keys = document.getElementsByClassName("key");
   for (let i = 0; i < keys.length; i++) {
-    keys[i].classList.remove('active', 'selected', 'correct', 'wrong');
+    keys[i].classList.remove('active', 'selected', 'correct', 'wrong', 'debug');
   }
 }
 
@@ -122,11 +110,6 @@ function hideTask() {
 function updateScore() {
   document.getElementById("correct").innerHTML = correct + '';
   document.getElementById("total").innerHTML = total + '';
-}
-
-function resetScore() {
-  correct = 0;
-  total = 0;
 }
 
 function printDescription(text) {
@@ -147,30 +130,9 @@ function findElement(key) {
   }
   let element = document.getElementById("key_" + key.toStr());
   if (!element) {
-    element = document.getElementById("key_" + findSame(key.note).toStr());
+    element = document.getElementById("key_" + findSame(key.note, key.octave).toStr());
   }
   return element;
-}
-
-function startTimer() {
-  const minutesLabel = document.getElementById("minutes");
-  const secondsLabel = document.getElementById("seconds");
-  let totalSeconds = 0;
-  clearInterval(clock);
-  clock = setInterval(() => {
-    ++totalSeconds;
-    secondsLabel.innerHTML = pad(totalSeconds % 60);
-    minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-  }, 1000);
-}
-
-function pad(val) {
-  let valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
-  }
 }
 
 window.onload = function() {

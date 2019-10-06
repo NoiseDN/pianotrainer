@@ -2,11 +2,11 @@ let mode = 'TONE';
 
 function setTone() {
   mode = 'TONE';
-  initialize();
+  startLesson();
 }
 function setSemitone() {
   mode = 'SEMITONE';
-  initialize();
+  startLesson();
 }
 
 /**
@@ -17,40 +17,51 @@ function runToneSemitone() {
   pianoClickable = true;
   hideButtons();
   showSettings();
+  printTask('...');
 
-  // save note globally
-  taskKey = getRandomKey(getRandomOctave());
+  selectedOctave = getRandomOctave();
+  taskKey = getRandomKey();
+  debug && console.log('task key: ', taskKey);
+  if (debug && mode === 'TONE') {
+    findElement(taskKey.getTone()).classList.add('debug');
+  }
+  if (debug && mode === 'SEMITONE') {
+    findElement(taskKey.getSemitone()).classList.add('debug');
+  }
 
   printDescription(getSelectedLesson().displayName +
       (mode === 'TONE' ? " - Build tone" : " - Build semitone"));
 
-  printTask(taskKey.note);
   findElement(taskKey).classList.add("selected");
 }
 
-function verifyPressed() {
+function lesson3_verifyPressed() {
   const pressedEl = findElement(pressedKey);
   pressedEl.classList.remove('active');
 
+  debug && console.log('pressed key: ', pressedKey);
+
   if (mode === 'TONE') {
-    if (taskKey.isToneFor(pressedKey)) {
+    if (pressedKey.isToneFor(taskKey)) {
       pressedEl.classList.add('correct');
       printTask(pressedKey.note + " - Correct! :)");
       correct++;
     } else {
       pressedEl.classList.add('wrong');
-      //TODO make tone key green
-      printTask(pressedKey.note + " - Wrong! :(");
+      const toneKey = taskKey.getTone();
+      findElement(toneKey).classList.add('correct');
+      printTask(pressedKey.note + " - Wrong! :( Correct - " + toneKey.note);
     }
   } else {
-    if (taskKey.isSemitoneFor(pressedKey)) {
+    if (pressedKey.isSemitoneFor(taskKey)) {
       pressedEl.classList.add('correct');
       printTask(pressedKey.note + " - Correct! :)");
       correct++;
     } else {
       pressedEl.classList.add('wrong');
-      //TODO make tone key green
-      printTask(pressedKey.note + " - Wrong! :(");
+      const semitoneKey = taskKey.getSemitone();
+      findElement(semitoneKey).classList.add('correct');
+      printTask(pressedKey.note + " - Wrong! :( Correct - " + semitoneKey.note);
     }
   }
 }

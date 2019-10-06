@@ -43,6 +43,9 @@ class Key {
   }
 
   sameAs(name) {
+    if (this.note === name) {
+      return true;
+    }
     if (this.note === 'C#' && name === 'Db' || this.note === 'Db' && name === 'C#')  {
       return true;
     }
@@ -60,18 +63,26 @@ class Key {
     }
   }
 
+  getTone() {
+    return TONES.get(this);
+  }
+
   isToneFor(other) {
     if (!other) {
       return false;
     }
-    return TONES.get(this).equals(other);
+    return other.getTone().equals(this);
+  }
+
+  getSemitone() {
+    return SEMITONES.get(this);
   }
 
   isSemitoneFor(other) {
     if (!other) {
       return false;
     }
-    return SEMITONES.get(this).equals(other);
+    return other.getSemitone().equals(this);
   }
 }
 
@@ -136,35 +147,30 @@ for (let o = 1; o <= OCTAVES; o++) {
 }
 
 // Link tones between octaves
-TONES.set(getKey('A#', 1, true, false), getKey('C', 2));
-TONES.set(getKey('Bb', 1, false, true), getKey('C', 2));
-TONES.set(getKey('B', 1), getKey('C#', 2, true, false));
-TONES.set(getKey('B', 1), getKey('Db', 2, false, true));
-TONES.set(getKey('A#', 2, true, false), getKey('C', 1));
-TONES.set(getKey('Bb', 2, false, true), getKey('C', 1));
-TONES.set(getKey('B', 2), getKey('C#', 1, true, false));
-TONES.set(getKey('B', 2), getKey('Db', 1, false, true));
+TONES.set(getKey('A#', 1), getKey('C', 2));
+TONES.set(getKey('Bb', 1), getKey('C', 2));
+TONES.set(getKey('B', 1), getKey('C#', 2));
+TONES.set(getKey('B', 1), getKey('Db', 2));
+TONES.set(getKey('A#', 2), getKey('C', 1));
+TONES.set(getKey('Bb', 2), getKey('C', 1));
+TONES.set(getKey('B', 2), getKey('C#', 1));
+TONES.set(getKey('B', 2), getKey('Db', 1));
 
 // Link semitones between octaves
 SEMITONES.set(getKey('B', 1), getKey('C', 2));
 SEMITONES.set(getKey('B', 2), getKey('C', 1));
 
-function getKey(noteName, octave, sharp = false, flat = false) {
-  let key = KEYS.find(n => n.note === noteName &&
-      n.octave === octave && n.sharp === sharp && n.flat === flat);
-  if (!key) {
-    key = findSame(noteName);
-  }
-  return key;
+function getKey(noteName, octave) {
+  return KEYS
+    .filter(k => k.octave === octave)
+    .find(k => k.note === noteName);
 }
 
-function getRandomKey(octave) {
+function getRandomKey() {
   let keys = [];
-  const octaveKeys = KEYS.filter(k => k.octave === octave);
+  const octaveKeys = KEYS.filter(k => k.octave === selectedOctave);
 
-  // always include white keys
-  keys = keys.concat(octaveKeys.filter(k => k.white));
-
+  keys = keys.concat(octaveKeys.filter(k => white ? k.white : false));
   keys = keys.concat(octaveKeys.filter(k => sharp ? k.sharp : false));
   keys = keys.concat(octaveKeys.filter(k => flat ? k.flat : false));
 
@@ -175,8 +181,10 @@ function getRandomOctave() {
   return getRandomInt(OCTAVES) + 1;
 }
 
-function findSame(keyName) {
-  return KEYS.find(n => n.sameAs(keyName));
+function findSame(keyName, octave) {
+  return KEYS
+    .filter(k => k.octave === octave)
+    .find(k => k.sameAs(keyName));
 }
 
 

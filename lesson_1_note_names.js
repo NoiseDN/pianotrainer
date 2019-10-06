@@ -6,17 +6,20 @@ function runNoteNames() {
   pianoClickable = true;
 
   hideButtons();
-  highlightRandomOctave();
-
-  // save note globally
-  taskKey = getRandomKey(selectedOctave);
+  selectedOctave = getRandomOctave();
+  highlightSelectedOctave();
+  taskKey = getRandomKey();
+  debug && console.log('task key: ', taskKey);
+  debug && findElement(taskKey).classList.add('debug');
 
   printTask(taskKey.note);
 }
 
-function verifyPressed() {
+function lesson1_verifyPressed() {
   const pressedEl = findElement(pressedKey);
   pressedEl.classList.remove('active');
+
+  debug && console.log('pressed key: ', pressedKey);
 
   if (pressedKey.equals(taskKey)) {
     pressedEl.classList.add('correct');
@@ -31,9 +34,7 @@ function verifyPressed() {
   }
 }
 
-function highlightRandomOctave() {
-  selectedOctave = getRandomOctave();
-
+function highlightSelectedOctave() {
   const keys = document.getElementsByClassName("key");
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
