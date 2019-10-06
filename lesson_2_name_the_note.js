@@ -17,7 +17,7 @@ function runNameTheNote() {
 }
 
 function selectNote(noteName) {
-  if (!buttonsClickable) {
+  if (!buttonsClickable || !noteName) {
     return;
   }
   buttonsClickable = false; //TODO change style of disabled buttons
@@ -49,10 +49,22 @@ function renderButtons() {
     let button = document.createElement("div");
     button.classList.add('button');
     button.setAttribute('id', 'button_' + buttons[i]);
+    button.setAttribute('title', getHint(buttons[i]));
     button.addEventListener('click', () => selectNote(buttons[i]));
     button.innerHTML = buttons[i];
     container.appendChild(button);
   }
+}
+
+function getHint(note) {
+  let prefix = '';
+  if (note.indexOf('#') !== -1) {
+    prefix = 'Shift + ';
+  } else if (note.indexOf('b') !== -1) {
+    prefix = 'Ctrl + ';
+  }
+
+  return 'Keyboard: ' + prefix + note.substr(0, 1);
 }
 
 function getRandomButtons() {
@@ -79,4 +91,33 @@ function getButtons() {
 
 function findButton(noteName) {
   return document.getElementById('button_' + noteName);
+}
+
+/**
+ * Support keyboard keys
+ */
+document.addEventListener('keyup', function(event) {
+  if (getSelectedLesson() !== LESSON.NAME_THE_NOTE) {
+    return;
+  }
+  debug && console.log('Keyboard key pressed: ', event.code);
+  handleKey(event, 'KeyA', 'A', 'A#', 'Ab');
+  handleKey(event, 'KeyB', 'B', null, 'Bb'); // exclude B#
+  handleKey(event, 'KeyC', 'C', 'C#', null); // exclude Cb
+  handleKey(event, 'KeyD', 'D', 'D#', 'Db');
+  handleKey(event, 'KeyE', 'E', null, 'Eb'); // exclude E#
+  handleKey(event, 'KeyF', 'F', 'F#', null); // exclude Fb
+  handleKey(event, 'KeyG', 'G', 'G#', 'Gb');
+});
+
+function handleKey(event, code, note, shiftNote, ctrlNote) {
+  if (event.code === code) {
+    if (sharp && event.shiftKey) {
+      selectNote(shiftNote);
+    } else if (flat && event.ctrlKey) {
+      selectNote(ctrlNote);
+    } else {
+      selectNote(note);
+    }
+  }
 }

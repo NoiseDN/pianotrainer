@@ -1,9 +1,8 @@
 const debug = false;
 let taskKey, pressedKey, selectedOctave;
 
-//TODO: 1. support keyboard
-//TODO: 2. support MIDI-keyboard
-//TODO: 3. re-start lesson if task key is same as previous one
+//TODO: 1. support MIDI-keyboard
+//TODO: 2. re-start lesson if task key is same as previous one
 
 function hit(key) {
   if (!pianoClickable || !key) {
