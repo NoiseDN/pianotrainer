@@ -42,7 +42,7 @@ function startTimer() {
     ++totalSeconds;
     secondsLabel.innerHTML = pad(totalSeconds % 60);
     minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-  }, debug ? 1000 : 200);
+  }, 1000);
 }
 
 function pad(val) {
