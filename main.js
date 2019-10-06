@@ -1,4 +1,4 @@
-const debug = true;
+const debug = false;
 let taskKey, pressedKey, selectedOctave;
 
 //TODO: 1. support keyboard
