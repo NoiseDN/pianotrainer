@@ -178,7 +178,7 @@ function getKey(noteName, octave) {
     .find(k => k.note === noteName);
 }
 
-function getRandomKey() {
+function setRandomKey() {
   let keys = [];
   const octaveKeys = KEYS.filter(k => k.octave === selectedOctave);
 
@@ -186,7 +186,13 @@ function getRandomKey() {
   keys = keys.concat(octaveKeys.filter(k => sharp ? k.sharp : false));
   keys = keys.concat(octaveKeys.filter(k => flat ? k.flat : false));
 
-  return keys[getRandomInt(keys.length)];
+  // re-generate a key if same as previous
+  const newKey = keys[getRandomInt(keys.length)];
+  if (newKey.equals(taskKey)) {
+    setRandomKey(newKey);
+  } else {
+    taskKey = newKey;
+  }
 }
 
 function findSame(key) {

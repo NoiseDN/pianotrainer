@@ -9,7 +9,7 @@ function runNameTheNote() {
   showButtons();
 
   selectRandomOctave();
-  taskKey = getRandomKey();
+  setRandomKey();
   debug && console.log('task key: ', taskKey);
   debug && findButton(taskKey.note).classList.add('debug');
   findElement(taskKey).classList.add('active');
@@ -24,9 +24,9 @@ function selectNote(noteName) {
 
   debug && console.log('selected note: ' + noteName);
 
-  addClass(findButton(taskKey.note), 'correct');
   if (taskKey.note === noteName || taskKey.sameAs(noteName)) {
     setTask(noteName + ' - Correct! :)');
+    addClass(findButton(taskKey.note), 'correct');
     correctAnswer();
   } else {
     setTask(noteName + ' - Wrong! :(');

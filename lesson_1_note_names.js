@@ -8,7 +8,7 @@ function runNoteNames() {
   selectRandomOctave();
   highlightSelectedOctave();
 
-  taskKey = getRandomKey();
+  setRandomKey();
   debug && console.log('task key: ', taskKey);
   debug && findElement(taskKey).classList.add('debug');
 
@@ -29,7 +29,7 @@ function lesson1_verifyPressed() {
     addClass(pressedEl,'wrong');
     const taskEl = findElement(taskKey);
     removeClass(taskEl, 'active');
-    addClass(pressedEl,'correct');
+    addClass(taskEl,'correct');
     setTask(pressedKey.note + " - Wrong! :(");
   }
   finishLesson();

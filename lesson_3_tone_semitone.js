@@ -21,7 +21,7 @@ function runToneSemitone() {
   setTask('...');
 
   selectRandomOctave();
-  taskKey = getRandomKey();
+  setRandomKey();
   debug && console.log('task key: ', taskKey);
   if (debug && mode === MODE.TONE) {
     addClass(findElement(taskKey.getTone()), 'debug');

@@ -199,7 +199,7 @@ ul#piano li span.flat.debug {
 }
 
 .button.disabled {
-  opacity: .5;
+  opacity: .7;
 }
 
 .button:active {
@@ -217,7 +217,7 @@ ul#piano li span.flat.debug {
 .button.wrong {
   background-color: #E74C3C;
   border-bottom: 5px solid #BD3E31;
-  text-shadow: 0px -2px #BD3E31;
+  text-shadow: 0 -2px #BD3E31;
 }
 
 /*.button:hover {*/
