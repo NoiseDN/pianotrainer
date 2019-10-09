@@ -20,3 +20,11 @@ function shuffle(array) {
 
   return array;
 }
+
+function addClass(element, ...classes) {
+  element.classList.add(classes);
+}
+
+function removeClass(element, ...classes) {
+  element.classList.remove(classes);
+}

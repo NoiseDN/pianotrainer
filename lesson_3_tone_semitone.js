@@ -1,11 +1,12 @@
-let mode = 'TONE';
+const MODE = Object.freeze({ TONE: 1, SEMITONE: 2 });
+let mode = MODE.TONE;
 
 function setTone() {
-  mode = 'TONE';
+  mode = MODE.TONE;
   startLesson();
 }
 function setSemitone() {
-  mode = 'SEMITONE';
+  mode = MODE.SEMITONE;
   startLesson();
 }
 
@@ -14,64 +15,64 @@ function setSemitone() {
  *  Objective: learn tones and semitones
  */
 function runToneSemitone() {
-  pianoClickable = true;
+  enablePiano();
   hideButtons();
-  showSettings();
-  printTask('...');
+  showLesson3Settings();
+  setTask('...');
 
-  selectedOctave = getRandomOctave();
+  selectRandomOctave();
   taskKey = getRandomKey();
   debug && console.log('task key: ', taskKey);
-  if (debug && mode === 'TONE') {
-    findElement(taskKey.getTone()).classList.add('debug');
+  if (debug && mode === MODE.TONE) {
+    addClass(findElement(taskKey.getTone()), 'debug');
   }
-  if (debug && mode === 'SEMITONE') {
-    findElement(taskKey.getSemitone()).classList.add('debug');
+  if (debug && mode === MODE.SEMITONE) {
+    addClass(findElement(taskKey.getSemitone()), 'debug');
   }
 
-  printDescription(getSelectedLesson().displayName +
-      (mode === 'TONE' ? " - Build tone" : " - Build semitone"));
+  setDescription('Build ' + (mode === MODE.TONE ? '' : 'semi') + 'tone');
 
-  findElement(taskKey).classList.add("selected");
+  addClass(findElement(taskKey), 'active');
 }
 
 function lesson3_verifyPressed() {
   const pressedEl = findElement(pressedKey);
-  pressedEl.classList.remove('active');
+  removeClass(pressedEl, 'active');
 
   debug && console.log('pressed key: ', pressedKey);
 
-  if (mode === 'TONE') {
+  if (mode === MODE.TONE) {
     if (pressedKey.isToneFor(taskKey)) {
-      pressedEl.classList.add('correct');
-      printTask(pressedKey.note + " - Correct! :)");
-      correct++;
+      addClass(pressedEl, 'correct');
+      setTask(pressedKey.note + ' - Correct! :)');
+      correctAnswer();
     } else {
-      pressedEl.classList.add('wrong');
+      addClass(pressedEl, 'wrong');
       const toneKey = taskKey.getTone();
-      findElement(toneKey).classList.add('correct');
-      printTask(pressedKey.note + " - Wrong! :( Correct - " + toneKey.note);
+      addClass(findElement(toneKey), 'correct');
+      setTask(pressedKey.note + ' - Wrong! :( Correct - ' + toneKey.note);
     }
   } else {
     if (pressedKey.isSemitoneFor(taskKey)) {
-      pressedEl.classList.add('correct');
-      printTask(pressedKey.note + " - Correct! :)");
-      correct++;
+      addClass(pressedEl, 'correct');
+      setTask(pressedKey.note + ' - Correct! :)');
+      correctAnswer();
     } else {
-      pressedEl.classList.add('wrong');
+      addClass(pressedEl, 'wrong');
       const semitoneKey = taskKey.getSemitone();
-      findElement(semitoneKey).classList.add('correct');
-      printTask(pressedKey.note + " - Wrong! :( Correct - " + semitoneKey.note);
+      addClass(findElement(semitoneKey), 'correct');
+      setTask(pressedKey.note + ' - Wrong! :( Correct - ' + semitoneKey.note);
     }
   }
+  finishLesson();
 }
 
-function showSettings() {
+function showLesson3Settings() {
   document.getElementById('lesson3-tone').style.display = 'inline-block';
   document.getElementById('lesson3-semitone').style.display = 'inline-block';
 }
 
-function hideSettings() {
+function hideLesson3Settings() {
   document.getElementById('lesson3-tone').style.display = 'none';
   document.getElementById('lesson3-semitone').style.display = 'none';
 }

@@ -2,6 +2,7 @@
 <head>
   <title>Open piano trainer</title>
   <script type="text/javascript" src="keys.js"></script>
+  <script type="text/javascript" src="piano.js"></script>
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="settings.js"></script>
   <script type="text/javascript" src="util.js"></script>
@@ -12,13 +13,16 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<section class="piano" id="piano"></section>
-<section class="task-description">
-  <div id="description" class="title"></div>
+<section id="piano-wrapper">
+  <ul id="piano"></ul>
 </section>
-<section id="task_note" class="task"></section>
-<section id="task-container" class="task-container">
-  <span id="note_buttons" class="buttons"></span>
+<section class="lesson">
+  <div class="title" id="title"></div>
+  <div class="description" id="description"></div>
+</section>
+<section id="task" class="task"></section>
+<section class="buttons-wrapper" id="buttons-wrapper">
+  <div class="buttons" id="buttons"></div>
 </section>
 <table class="settings">
   <tr>
@@ -26,10 +30,10 @@
       <input type="checkbox" name="white" id="white" checked onclick="toggleWhite()"/><label for="white">White</label>
     </td>
     <td>
-      <input type="checkbox" name="sharp" id="sharp" onclick="toggleSharp()"/><label for="sharp">Sharp</label>
+      <input type="checkbox" name="sharp" id="sharp" checked onclick="toggleSharp()"/><label for="sharp">Sharp</label>
     </td>
     <td>
-      <input type="checkbox" name="flat" id="flat" onclick="toggleFlat()"/><label for="flat">Flat</label>
+      <input type="checkbox" name="flat" id="flat" checked onclick="toggleFlat()"/><label for="flat">Flat</label>
     </td>
     <td id="lesson3-tone">
       <input type="radio" name="lesson3" value="tone" id="tone" checked onclick="setTone()"/><label for="tone">Tone</label>
@@ -51,7 +55,7 @@
       <input type="checkbox" name="randomButtons" id="randomButtons" onclick="toggleRandomButtons()"/><label for="randomButtons">Random buttons</label>
     </td>
     <td>
-      Time: <span id="minutes">00</span>:<span id="seconds">00</span></span>
+      Time: <span id="minutes">00</span>:<span id="seconds">00</span>
     </td>
     <td>
       Score: <span id="correct">0</span>/<span id="total">0</span>

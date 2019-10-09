@@ -1,34 +1,12 @@
+/**
+ * Enable DEBUG mode for APP
+ */
 const debug = false;
+
+/**
+ * Global variables
+ */
 let taskKey, pressedKey, selectedOctave;
-
-//TODO: 1. support MIDI-keyboard
-//TODO: 2. re-start lesson if task key is same as previous one
-
-function hit(key) {
-  if (!pianoClickable || !key) {
-    return;
-  }
-
-  // save key globally
-  pressedKey = key;
-
-  switch (getSelectedLesson()) {
-    case LESSON.NOTE_NAMES:
-      lesson1_verifyPressed();
-      break;
-    case LESSON.TONE_SEMITONE:
-      lesson3_verifyPressed();
-      break;
-    default:
-      throw 'Lesson ' + getSelectedLesson() + ' not implemented'
-  }
-
-  total++;
-
-  setTimeout(() => {
-    startLesson();
-  }, debug ? 200 : 1000);
-}
 
 function initialize() {
   renderPiano();
@@ -37,45 +15,22 @@ function initialize() {
   startLesson();
 }
 
-function renderPiano() {
-  const container = document.getElementById('piano');
-  container.innerHTML = '';
-
-  for (let i = 0; i < KEYS.length; i++) {
-    const key = KEYS[i];
-    if (key.note.endsWith('b')) {
-      continue;
-    }
-    let noteEl = document.createElement("div");
-    noteEl.classList.add('key');
-    noteEl.classList.add(key.white ? 'white' : 'black');
-    if (!key.white) {
-      noteEl.classList.add(key.note.substr(0, 1).toLowerCase() + key.octave);
-    }
-    noteEl.setAttribute('id', 'key_' + key.note + key.octave);
-    noteEl.addEventListener('click', () => hit(key));
-    container.appendChild(noteEl);
-  }
-}
-
-function getSelectedLesson() {
-  const lessonIndex = document.getElementById("lesson").selectedIndex;
-  return findLesson(document.getElementsByTagName("option")[lessonIndex].value);
-}
-
 function startLesson() {
+  resetListeners();
   resetKeyColor();
   if (!white && !sharp && !flat) {
-    printDescription('Please select lesson mode: White / Sharp / Flat');
+    setDescription('Please select lesson mode: White / Sharp / Flat');
     hideTask();
     return;
   }
-  printDescription(getSelectedLesson().displayName + " - " + getSelectedLesson().description);
-  printTask('...');
+  let lesson = getSelectedLesson();
+  setTitle('Lesson ' + lesson.index + ' : ' + lesson.displayName);
+  setDescription(lesson.description);
+  setTask('...');
   updateScore();
-  hideSettings();
+  hideLesson3Settings();
 
-  switch (getSelectedLesson()) {
+  switch (lesson) {
     case LESSON.NOTE_NAMES:
       runNoteNames();
     break;
@@ -86,52 +41,69 @@ function startLesson() {
       runToneSemitone();
     break;
     default:
-      throw 'Lesson ' + getSelectedLesson() + ' not implemented'
+      throw 'Lesson ' + lesson + ' not implemented'
   }
 }
 
 function resetKeyColor() {
-  const keys = document.getElementsByClassName("key");
-  for (let i = 0; i < keys.length; i++) {
-    keys[i].classList.remove('active', 'selected', 'correct', 'wrong', 'debug');
+  const whiteKeys = document.getElementsByClassName('anchor');
+  for (let i = 0; i < whiteKeys.length; i++) {
+    whiteKeys[i].classList.remove('active', 'selected', 'correct', 'wrong', 'debug');
+  }
+  const blackKeys = document.getElementsByClassName('flat');
+  for (let i = 0; i < blackKeys.length; i++) {
+    blackKeys[i].classList.remove('active', 'selected', 'correct', 'wrong', 'debug');
   }
 }
 
-function printTask(text) {
-  document.getElementById("task_note").style.display = 'block';
-  document.getElementById("task_note").innerHTML = text;
+function setTask(text) {
+  document.getElementById('task').style.display = 'block';
+  document.getElementById('task').innerHTML = text;
 }
 
 function hideTask() {
-  document.getElementById("task_note").style.display = 'none';
+  document.getElementById('task').style.display = 'none';
 }
 
 function updateScore() {
-  document.getElementById("correct").innerHTML = correct + '';
-  document.getElementById("total").innerHTML = total + '';
+  document.getElementById('correct').innerHTML = correct + '';
+  document.getElementById('total').innerHTML = total + '';
 }
 
-function printDescription(text) {
-  document.getElementById("description").innerHTML = text;
+function setTitle(text) {
+  document.getElementById('title').innerHTML = text;
+}
+
+function setDescription(text) {
+  document.getElementById('description').innerHTML = text;
 }
 
 function showButtons() {
-  document.getElementById('task-container').style.display = 'block';
+  document.getElementById('buttons-wrapper').style.display = 'block';
 }
 
 function hideButtons() {
-  document.getElementById('task-container').style.display = 'none';
+  document.getElementById('buttons-wrapper').style.display = 'none';
 }
 
 function findElement(key) {
   if (!key) {
     throw 'Cannot find undefined key';
   }
-  let element = document.getElementById("key_" + key.toStr());
+  let element;
+  if (key.sharp) {
+    element = document.getElementById('key_' + findSame(key).toStr());
+  } else {
+    element = document.getElementById('key_' + key.toStr());
+  }
   if (!element) {
-    element = document.getElementById("key_" + findSame(key.note, key.octave).toStr());
+    throw 'Could not find element for key ' + key.toStr();
   }
   return element;
+}
+
+function resetListeners() {
+  document.addEventListener('keyup', () => {});
 }
 
 window.onload = function() {

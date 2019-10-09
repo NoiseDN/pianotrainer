@@ -1,66 +1,179 @@
-.piano {
-  display: inline-table;
-  width: 1168px;
+body {
+  margin: 0;
 }
-.task-container {
-  text-align: center;
-  width: 1168px;
-  padding: 50px 0;
+
+#piano-wrapper {
+  width: 1120px;
+  position: relative;
+  left: -52px;
 }
+
+/* Keys */
+ul#piano {
+  display: block;
+  width: 100%;
+  height: 240px;
+  border-top: 2px solid #222;
+}
+
+ul#piano li {
+  list-style: none;
+  float: left;
+  display: inline;
+  background: #aaa;
+  width: 40px;
+  position: relative;
+  cursor: pointer;
+}
+
+ul#piano li a, ul#piano li div.anchor {
+  display: block;
+  height: 220px;
+  background: #fff;
+  background: -webkit-linear-gradient(-30deg, #f5f5f5, #fff);
+  background: -moz-linear-gradient(-30deg, #f5f5f5, #fff);
+  background: -ms-linear-gradient(-30deg, #f5f5f5, #fff);
+  background: -o-linear-gradient(-30deg, #f5f5f5, #fff);
+  background: linear-gradient(-30deg, #f5f5f5, #fff);
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 #fff, inset 1px 0 0 #fff, inset -1px 0 0 #fff, 0 4px 3px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 #fff, inset 1px 0 0 #fff, inset -1px 0 0 #fff, 0 4px 3px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 #fff, inset 1px 0 0 #fff, inset -1px 0 0 #fff, 0 4px 3px rgba(0, 0, 0, 0.7);
+  -webkit-border-radius: 0 0 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+}
+
+ul#piano li a:active, ul#piano li div.anchor:active {
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+  position: relative;
+  top: 2px;
+  height: 216px;
+}
+
+ul#piano li a, ul#piano li div.anchor.active {
+  background: linear-gradient(-30deg, #dd9, #fff);
+}
+
+ul#piano li a, ul#piano li div.anchor.correct {
+  background: linear-gradient(-30deg, #0b0, #fff);
+}
+
+ul#piano li a, ul#piano li div.anchor.wrong {
+  background: linear-gradient(-30deg, #b00, #fff);
+}
+
+ul#piano li a, ul#piano li div.anchor.debug {
+  background: linear-gradient(-30deg, lightgreen, #fff) !important;
+}
+
+ul#piano li a:active:before, ul#piano li div.anchor:active:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-width: 216px 5px 0;
+  border-style: solid;
+  border-color: transparent transparent transparent rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+ul#piano li a:active:after, ul#piano li div.anchor:active:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-width: 216px 5px 0;
+  border-style: solid;
+  border-color: transparent rgba(0, 0, 0, 0.1) transparent transparent;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Black Tuts */
+ul#piano li span {
+  position: absolute;
+  top: 0;
+  left: -12px;
+  width: 20px;
+  height: 120px;
+  background: #333;
+  background: -webkit-linear-gradient(-20deg, #333, #000, #333);
+  background: -moz-linear-gradient(-20deg, #333, #000, #333);
+  background: -ms-linear-gradient(-20deg, #333, #000, #333);
+  background: -o-linear-gradient(-20deg, #333, #000, #333);
+  background: linear-gradient(-20deg, #333, #000, #333);
+  z-index: 10;
+  border-width: 1px 2px 7px;
+  border-style: solid;
+  border-color: #666 #222 #111 #555;
+  -webkit-box-shadow: inset 0 -1px 2px rgba(255, 255, 255, 0.4), 0 2px 3px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: inset 0 -1px 2px rgba(255, 255, 255, 0.4), 0 2px 3px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 -1px 2px rgba(255, 255, 255, 0.4), 0 2px 3px rgba(0, 0, 0, 0.4);
+  -webkit-border-radius: 0 0 2px 2px;
+  -moz-border-radius: 0 0 2px 2px;
+  border-radius: 0 0 2px 2px;
+}
+
+ul#piano li span:active {
+  border-bottom-width: 2px;
+  height: 123px;
+  -webkit-box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.4), 0 1px 0 rgba(0, 0, 0, 0.8), 0 2px 2px rgba(0, 0, 0, 0.4), 0 -1px 0 #000;
+  -moz-box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.4), 0 1px 0 rgba(0, 0, 0, 0.8), 0 2px 2px rgba(0, 0, 0, 0.4), 0 -1px 0 #000;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.4), 0 1px 0 rgba(0, 0, 0, 0.8), 0 2px 2px rgba(0, 0, 0, 0.4), 0 -1px 0 #000;
+}
+
+ul#piano li span.flat.active {
+  background: linear-gradient(-20deg, #333, #dd9, #333);
+}
+
+ul#piano li span.flat.correct {
+  background: linear-gradient(-20deg, #333, #0b0, #333);
+}
+
+ul#piano li span.flat.wrong {
+  background: linear-gradient(-20deg, #333, #b00, #333);
+}
+
+ul#piano li span.flat.debug {
+  background: linear-gradient(-20deg, #333, lightgreen, #333) !important;
+}
+
 .task {
   text-align: center;
-  width: 1168px;
+  width: 1120px;
   font-size: 62px;
 }
-.task-description {
-  text-align: center;
-  width: 1168px;
-  padding: 50px 0;
+
+.lesson {
+  padding-left: 16px;
 }
+
 .title {
-  font-size: 48px;
+  font-size: 32px;
+  font-family: sans-serif;
 }
-.key {
-  border: 2px solid black;
+
+.description {
+  font-size: 22px;
+  font-family: sans-serif;
 }
-.key.white {
-  border-right-width: 0;
-  width: 80px;
-  height: 200px;
-  display: inline-block;
-  cursor: pointer;
-}
-.key.white.active, .key.white.selected, .key.black.selected {
-  background-color: #dd9;
-}
-.key.white.debug, .key.black.debug {
-  background-color: lightgreen;
-}
-.key.white:last-child {
-  border-right-width: 2px;
-}
-.key.black {
-  border-top-width: 0;
-  width: 40px;
-  height: 140px;
-  background-color: #000;
-  position: absolute;
-  top: 10px;
-  cursor: pointer;
-}
-.key.correct {
-  background-color: #0b0 !important;
-}
-.key.wrong {
-  background-color: #b00;
-}
+
 .settings {
-  width: 1168px;
+  width: 1120px;
   border: 1px solid black;
   margin-top: 50px;
 }
 
+.buttons-wrapper {
+  width: 1120px;
+}
+
 .buttons {
+  padding: 50px 0;
   width: 500px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -68,29 +181,47 @@
 }
 
 .button {
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  position: relative;
+  padding: 10px 40px;
+  margin: 0 10px 10px 0;
+  float: left;
+  border-radius: 10px;
+  font-family: 'Pacifico', cursive;
+  font-size: 25px;
+  color: #FFF;
+  text-decoration: none;
+  background-color: #3498DB;
+  border-bottom: 5px solid #2980B9;
+  text-shadow: 0 -2px #2980B9;
   cursor: pointer;
-  width: 80px;
-  height: 40px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: lightgrey;
-  font-size: 33px;
-  margin-top: 15px;
-}
-.button.debug {
-  background-color: lightgreen;
-}
-.button:hover {
-  background-color: darkgrey;
 }
 
-.key.black.c1 { left: 70px; }
-.key.black.d1 { left: 153px; }
-.key.black.f1 { left: 316px; }
-.key.black.g1 { left: 399px; }
-.key.black.a1 { left: 481px; }
-.key.black.c2 { left: 645px; }
-.key.black.d2 { left: 728px; }
-.key.black.f2 { left: 891px; }
-.key.black.g2 { left: 974px; }
-.key.black.a2 { left: 1055px; }
+.button.disabled {
+  opacity: .5;
+}
+
+.button:active {
+  transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+  border-bottom: 1px solid;
+}
+
+.button.correct, .button.debug {
+  background-color: #82BF56;
+  border-bottom: 5px solid #669644;
+  text-shadow: 0 -2px #669644;
+}
+
+.button.wrong {
+  background-color: #E74C3C;
+  border-bottom: 5px solid #BD3E31;
+  text-shadow: 0px -2px #BD3E31;
+}
+
+/*.button:hover {*/
+/*  background-color: #F2CF66;*/
+/*  border-bottom: 5px solid #D1B358;*/
+/*  text-shadow: 0 -2px #D1B358;*/
+/*}*/
