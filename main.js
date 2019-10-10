@@ -26,7 +26,6 @@ function startLesson() {
   setTitle('Lesson ' + lesson.index + ' : ' + lesson.displayName);
   setDescription(lesson.description);
   setTask('...');
-  updateScore();
   hideLesson3Settings();
 
   switch (lesson) {

@@ -64,7 +64,6 @@ function lesson3_verifyPressed() {
       setTask(pressedKey.note + ' - Wrong! :( Correct - ' + semitoneKey.note);
     }
   }
-  finishLesson();
 }
 
 function showLesson3Settings() {

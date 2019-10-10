@@ -40,6 +40,7 @@ function correctAnswer() {
 
 function finishLesson() {
   total++;
+  updateScore();
 }
 
 function enablePiano() {

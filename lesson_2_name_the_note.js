@@ -26,7 +26,7 @@ function selectNote(noteName) {
 
   if (taskKey.note === noteName || taskKey.sameAs(noteName)) {
     setTask(noteName + ' - Correct! :)');
-    addClass(findButton(taskKey.note), 'correct');
+    addClass(findButton(noteName), 'correct');
     correctAnswer();
   } else {
     setTask(noteName + ' - Wrong! :(');

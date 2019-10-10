@@ -32,5 +32,4 @@ function lesson1_verifyPressed() {
     addClass(taskEl,'correct');
     setTask(pressedKey.note + " - Wrong! :(");
   }
-  finishLesson();
 }
