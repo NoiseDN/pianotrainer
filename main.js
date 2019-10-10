@@ -16,7 +16,6 @@ function initialize() {
 }
 
 function startLesson() {
-  resetListeners();
   resetKeyColor();
   if (!white && !sharp && !flat) {
     setDescription('Please select lesson mode: White / Sharp / Flat');
@@ -102,10 +101,23 @@ function findElement(key) {
   return element;
 }
 
-function resetListeners() {
-  document.addEventListener('keyup', () => {});
-}
-
 window.onload = function() {
   initialize();
 };
+
+/**
+ * Support keyboard keys
+ */
+document.addEventListener('keyup', function(event) {
+  if (getSelectedLesson() !== LESSON.NAME_THE_NOTE) {
+    return;
+  }
+  debug && console.log('Keyboard key pressed: ', event.code);
+  handleKey(event, 'KeyA', 'A', 'A#', 'Ab');
+  handleKey(event, 'KeyB', 'B', null, 'Bb'); // exclude B#
+  handleKey(event, 'KeyC', 'C', 'C#', null); // exclude Cb
+  handleKey(event, 'KeyD', 'D', 'D#', 'Db');
+  handleKey(event, 'KeyE', 'E', null, 'Eb'); // exclude E#
+  handleKey(event, 'KeyF', 'F', 'F#', null); // exclude Fb
+  handleKey(event, 'KeyG', 'G', 'G#', 'Gb');
+});
