@@ -89,6 +89,10 @@ class Key {
   getFlatKey() {
     return this.flatKey;
   }
+
+  getChord(major) {
+    return major ? MAJOR_CHORDS.get(this) : MINOR_CHORDS.get(this);
+  }
 }
 
 for (let o = 0; o <= OCTAVES + 1; o++) {
@@ -149,6 +153,30 @@ for (let o = 0; o <= OCTAVES + 1; o++) {
   SEMITONES.set(A, Ash);
   SEMITONES.set(Ash, B);
   SEMITONES.set(Bb, B);
+
+  /**
+   *  MAJOR CHORDS
+   *  link only flat notes (due to flat notes rendered only)
+   */
+  addChord(false, C, E, G);
+  addChord(false, Csh, F, Ab);
+  addChord(false, Db, F, Ab);
+  addChord(false, D, Gb, A);
+  addChord(false, Dsh, G, Bb);
+  addChord(false, Eb, G, Bb);
+  addChord(false, E, Ab, B);
+
+  /**
+   *  MINOR CHORDS
+   *  link only flat notes (due to flat notes rendered only)
+   */
+  addChord(true, C, Eb, G);
+  addChord(true, Csh, E, Ab);
+  addChord(true, Db, E, Ab);
+  addChord(true, D, F, A);
+  addChord(true, Dsh, Gb, Bb);
+  addChord(true, Eb, Gb, Bb);
+  addChord(true, E, G, B);
 }
 
 // Link tones between octaves
@@ -171,6 +199,52 @@ TONES.set(getKey('B', 2), getKey('Db', 3));
 SEMITONES.set(getKey('B', 0), getKey('C', 1));
 SEMITONES.set(getKey('B', 1), getKey('C', 2));
 SEMITONES.set(getKey('B', 2), getKey('C', 3));
+
+// Link major chords between octaves (link only flat keys)
+addChord(false, getKey('F', 1), getKey('A', 1), getKey('C', 2));
+addChord(false, getKey('F#', 1), getKey('Bb', 1), getKey('Eb', 2));
+addChord(false, getKey('Gb', 1), getKey('Bb', 1), getKey('Db', 2));
+addChord(false, getKey('G', 1), getKey('B', 1), getKey('D', 2));
+addChord(false, getKey('G#', 1), getKey('C', 2), getKey('Eb', 2));
+addChord(false, getKey('Ab', 1), getKey('C', 2), getKey('Eb', 2));
+addChord(false, getKey('A', 1), getKey('Gb', 2), getKey('E', 2));
+addChord(false, getKey('A#', 1), getKey('D', 2), getKey('F', 2));
+addChord(false, getKey('Bb', 1), getKey('D', 2), getKey('F', 2));
+addChord(false, getKey('B', 1), getKey('Eb', 2), getKey('Gb', 2));
+
+addChord(false, getKey('F', 2), getKey('A', 2), getKey('C', 3));
+addChord(false, getKey('F#', 2), getKey('Bb', 2), getKey('Gb', 3));
+addChord(false, getKey('Gb', 2), getKey('Bb', 2), getKey('Db', 3));
+addChord(false, getKey('G', 2), getKey('B', 2), getKey('D', 3));
+addChord(false, getKey('G#', 2), getKey('C', 3), getKey('Eb', 3));
+addChord(false, getKey('Ab', 2), getKey('C', 3), getKey('Eb', 3));
+addChord(false, getKey('A', 2), getKey('Db', 3), getKey('E', 3));
+addChord(false, getKey('A#', 2), getKey('D', 3), getKey('F', 3));
+addChord(false, getKey('Bb', 2), getKey('D', 3), getKey('F', 3));
+addChord(false, getKey('B', 2), getKey('Eb', 3), getKey('Gb', 3));
+
+// Link minor chords between octaves (link only flat keys)
+addChord(true, getKey('F', 1), getKey('Ab', 1), getKey('C', 2));
+addChord(true, getKey('F#', 1), getKey('A', 1), getKey('Db', 2));
+addChord(true, getKey('Gb', 1), getKey('A', 1), getKey('Db', 2));
+addChord(true, getKey('G', 1), getKey('Bb', 1), getKey('D', 2));
+addChord(true, getKey('G#', 1), getKey('B', 1), getKey('Eb', 2));
+addChord(true, getKey('Ab', 1), getKey('B', 2), getKey('Eb', 2));
+addChord(true, getKey('A', 1), getKey('C', 2), getKey('E', 2));
+addChord(true, getKey('A#', 1), getKey('Db', 2), getKey('F', 2));
+addChord(true, getKey('Bb', 1), getKey('Db', 2), getKey('F', 2));
+addChord(true, getKey('B', 1), getKey('D', 2), getKey('Gb', 2));
+
+addChord(true, getKey('F', 2), getKey('Ab', 2), getKey('C', 3));
+addChord(true, getKey('F#', 2), getKey('A', 2), getKey('Db', 3));
+addChord(true, getKey('Gb', 2), getKey('A', 2), getKey('Db', 3));
+addChord(true, getKey('G', 2), getKey('Bb', 2), getKey('D', 3));
+addChord(true, getKey('G#', 2), getKey('B', 2), getKey('Eb', 3));
+addChord(true, getKey('Ab', 2), getKey('B', 3), getKey('Eb', 3));
+addChord(true, getKey('A', 2), getKey('C', 3), getKey('E', 3));
+addChord(true, getKey('A#', 2), getKey('Db', 3), getKey('F', 3));
+addChord(true, getKey('Bb', 2), getKey('Db', 3), getKey('F', 3));
+addChord(true, getKey('B', 2), getKey('D', 3), getKey('Gb', 3));
 
 function getKey(noteName, octave) {
   return KEYS

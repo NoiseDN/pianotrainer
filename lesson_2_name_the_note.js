@@ -7,6 +7,8 @@ function runNameTheNote() {
   enableButtons();
   renderButtons();
   showButtons();
+  hideAllLessonSettings();
+  showLesson2Settings();
 
   selectRandomOctave();
   setRandomKey();
@@ -104,4 +106,14 @@ function handleKey(event, code, note, shiftNote, ctrlNote) {
       selectNote(note);
     }
   }
+}
+
+function showLesson2Settings() {
+  document.getElementById('lesson2-random').style.display = 'inline-block';
+  document.getElementById('lesson2-random').style.display = 'inline-block';
+}
+
+function hideLesson2Settings() {
+  document.getElementById('lesson2-random').style.display = 'none';
+  document.getElementById('lesson2-random').style.display = 'none';
 }

@@ -53,19 +53,23 @@ ul#piano li a:active, ul#piano li div.anchor:active {
   height: 216px;
 }
 
-ul#piano li a, ul#piano li div.anchor.active {
+ul#piano li div.anchor.active {
   background: linear-gradient(-30deg, #dd9, #fff);
 }
 
-ul#piano li a, ul#piano li div.anchor.correct {
-  background: linear-gradient(-30deg, #0b0, #fff);
+ul#piano li div.anchor.selected {
+  background: linear-gradient(-30deg, #99d, #fff);
 }
 
-ul#piano li a, ul#piano li div.anchor.wrong {
+ul#piano li div.anchor.correct {
+  background: linear-gradient(-30deg, #0b0, #fff) !important;
+}
+
+ul#piano li div.anchor.wrong {
   background: linear-gradient(-30deg, #b00, #fff);
 }
 
-ul#piano li a, ul#piano li div.anchor.debug {
+ul#piano li div.anchor.debug {
   background: linear-gradient(-30deg, lightgreen, #fff) !important;
 }
 
@@ -130,8 +134,12 @@ ul#piano li span.flat.active {
   background: linear-gradient(-20deg, #333, #dd9, #333);
 }
 
+ul#piano li span.flat.selected {
+  background: linear-gradient(-20deg, #333, #99d, #333);
+}
+
 ul#piano li span.flat.correct {
-  background: linear-gradient(-20deg, #333, #0b0, #333);
+  background: linear-gradient(-20deg, #333, #0b0, #333) !important;
 }
 
 ul#piano li span.flat.wrong {

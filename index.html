@@ -1,15 +1,17 @@
 <html>
 <head>
   <title>Open piano trainer</title>
+  <script type="text/javascript" src="chords.js"></script>
   <script type="text/javascript" src="keys.js"></script>
   <script type="text/javascript" src="piano.js"></script>
+  <script type="text/javascript" src="lessons.js"></script>
   <script type="text/javascript" src="main.js"></script>
   <script type="text/javascript" src="settings.js"></script>
   <script type="text/javascript" src="util.js"></script>
-  <script type="text/javascript" src="lessons.js"></script>
   <script type="text/javascript" src="lesson_1_note_names.js"></script>
   <script type="text/javascript" src="lesson_2_name_the_note.js"></script>
   <script type="text/javascript" src="lesson_3_tone_semitone.js"></script>
+  <script type="text/javascript" src="lesson_4_build_chord.js"></script>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -41,17 +43,23 @@
     <td id="lesson3-semitone">
       <input type="radio" name="lesson3" value="semitone" id="semitone" onclick="setSemitone()"/><label for="semitone">Semitone</label>
     </td>
+    <td id="lesson4-minor">
+      <input type="radio" name="lesson4" value="minor" id="minor" onclick="setL4Minor()"/><label for="minor">Minor</label>
+    </td>
+    <td id="lesson4-major">
+      <input type="radio" name="lesson4" value="major" id="major" checked onclick="setL4Major()"/><label for="major">Major</label>
+    </td>
     <td>
       <label for="lesson">Lesson: </label>
       <select name="lesson" id="lesson" onchange="startLesson()">
-        <option value="NOTE_NAMES" selected>1. Note names</option>
+        <option value="NOTE_NAMES">1. Note names</option>
         <option value="NAME_THE_NOTE">2. Name the note</option>
         <option value="TONE_SEMITONE">3. Tone / Semitone</option>
-        <option value="NAME_ACCORD">Name accord</option>
-        <option value="BUILD_ACCORD">Build accord</option>
+        <option value="BUILD_CHORD" selected>4. Build chord</option>
+        <option value="NAME_CHORD">5. Name chord</option>
       </select>
     </td>
-    <td>
+    <td id="lesson2-random">
       <input type="checkbox" name="randomButtons" id="randomButtons" onclick="toggleRandomButtons()"/><label for="randomButtons">Random buttons</label>
     </td>
     <td>

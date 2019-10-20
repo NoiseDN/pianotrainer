@@ -17,6 +17,7 @@ function setSemitone() {
 function runToneSemitone() {
   enablePiano();
   hideButtons();
+  hideAllLessonSettings();
   showLesson3Settings();
   setTask('...');
 
@@ -35,7 +36,7 @@ function runToneSemitone() {
   addClass(findElement(taskKey), 'active');
 }
 
-function lesson3_verifyPressed() {
+function lesson3_verifyPressed(pressedKey) {
   const pressedEl = findElement(pressedKey);
   removeClass(pressedEl, 'active');
 

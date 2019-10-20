@@ -7,6 +7,7 @@ function runNoteNames() {
   hideButtons();
   selectRandomOctave();
   highlightSelectedOctave();
+  hideAllLessonSettings();
 
   setRandomKey();
   debug && console.log('task key: ', taskKey);
@@ -15,7 +16,7 @@ function runNoteNames() {
   setTask(taskKey.note);
 }
 
-function lesson1_verifyPressed() {
+function lesson1_verifyPressed(pressedKey) {
   const pressedEl = findElement(pressedKey);
   addClass(pressedEl, 'active');
 

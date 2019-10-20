@@ -5,16 +5,15 @@ function hit(key) {
     return console.log('key undefined!');
   }
 
-  // save key globally
-  pressedKey = key;
-
   switch (getSelectedLesson()) {
     case LESSON.NOTE_NAMES:
-      lesson1_verifyPressed();
+      lesson1_verifyPressed(key);
       break;
     case LESSON.TONE_SEMITONE:
-      lesson3_verifyPressed();
+      lesson3_verifyPressed(key);
       break;
+    case LESSON.BUILD_CHORD:
+      return lesson4_verifyPressed(key);
     default:
       throw 'Lesson ' + getSelectedLesson() + ' not implemented'
   }

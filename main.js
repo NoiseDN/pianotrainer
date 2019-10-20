@@ -6,13 +6,14 @@ const debug = false;
 /**
  * Global variables
  */
-let taskKey, pressedKey, selectedOctave;
+let taskKey, selectedOctave;
 
 function initialize() {
   renderPiano();
   resetScore();
   startTimer();
   startLesson();
+  listenForKeyboard();
 }
 
 function startLesson() {
@@ -37,6 +38,9 @@ function startLesson() {
     break;
     case LESSON.TONE_SEMITONE:
       runToneSemitone();
+    break;
+    case LESSON.BUILD_CHORD:
+      runBuildChord();
     break;
     default:
       throw 'Lesson ' + lesson + ' not implemented'
@@ -84,6 +88,12 @@ function hideButtons() {
   document.getElementById('buttons-wrapper').style.display = 'none';
 }
 
+function hideAllLessonSettings() {
+  hideLesson2Settings();
+  hideLesson3Settings();
+  hideLesson4Settings();
+}
+
 function findElement(key) {
   if (!key) {
     throw 'Cannot find undefined key';
@@ -100,23 +110,25 @@ function findElement(key) {
   return element;
 }
 
+function listenForKeyboard() {
+  /**
+   * Support keyboard keys
+   */
+  document.addEventListener('keyup', function(event) {
+    if (getSelectedLesson() !== LESSON.NAME_THE_NOTE) {
+      return;
+    }
+    debug && console.log('Keyboard key pressed: ', event.code);
+    handleKey(event, 'KeyA', 'A', 'A#', 'Ab');
+    handleKey(event, 'KeyB', 'B', null, 'Bb'); // exclude B#
+    handleKey(event, 'KeyC', 'C', 'C#', null); // exclude Cb
+    handleKey(event, 'KeyD', 'D', 'D#', 'Db');
+    handleKey(event, 'KeyE', 'E', null, 'Eb'); // exclude E#
+    handleKey(event, 'KeyF', 'F', 'F#', null); // exclude Fb
+    handleKey(event, 'KeyG', 'G', 'G#', 'Gb');
+  });
+}
+
 window.onload = function() {
   initialize();
 };
-
-/**
- * Support keyboard keys
- */
-document.addEventListener('keyup', function(event) {
-  if (getSelectedLesson() !== LESSON.NAME_THE_NOTE) {
-    return;
-  }
-  debug && console.log('Keyboard key pressed: ', event.code);
-  handleKey(event, 'KeyA', 'A', 'A#', 'Ab');
-  handleKey(event, 'KeyB', 'B', null, 'Bb'); // exclude B#
-  handleKey(event, 'KeyC', 'C', 'C#', null); // exclude Cb
-  handleKey(event, 'KeyD', 'D', 'D#', 'Db');
-  handleKey(event, 'KeyE', 'E', null, 'Eb'); // exclude E#
-  handleKey(event, 'KeyF', 'F', 'F#', null); // exclude Fb
-  handleKey(event, 'KeyG', 'G', 'G#', 'Gb');
-});
